@@ -7,10 +7,14 @@
   <style>
     :root {
       --bg: #050505;
-      --gold: #f6c45c;
+      --gold: #ffc445;
       --gold-soft: #f2b94a;
       --text: #f7f2e9;
       --card-bg: #101010;
+      --card-hover: #181818;
+      --muted: #b6a88a;
+      --accent: #23a473;
+      --danger: #ff6b6b;
     }
 
     * {
@@ -20,11 +24,11 @@
     }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--bg);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, sans-serif;
+      background: radial-gradient(circle at top, #202020 0, #000 55%);
       color: var(--text);
-      line-height: 1.5;
-      padding: 24px;
+      min-height: 100vh;
     }
 
     a {
@@ -33,274 +37,712 @@
     }
 
     .page {
-      max-width: 1180px;
+      max-width: 1200px;
       margin: 0 auto;
+      padding: 32px 16px 64px;
     }
 
-    /* Шапка */
-
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 32px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .brand-logo {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 2px solid var(--gold);
-      flex-shrink: 0;
-    }
-
-    .brand-logo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .brand-text-title {
-      font-size: 24px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-    }
-
-    .brand-text-sub {
-      font-size: 14px;
-      color: #c6b896;
-    }
-
-    .cta-btn {
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      padding: 10px 20px;
-      border-radius: 999px;
-      font-size: 14px;
-      background: transparent;
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s, transform 0.1s;
-      white-space: nowrap;
-    }
-
-    .cta-btn:hover {
-      background: var(--gold);
-      color: #000;
-      transform: translateY(-1px);
-    }
-
-    /* Хедер-картинка */
+    /* HEADER */
 
     .hero {
-      border-radius: 18px;
-      overflow: hidden;
-      border: 1px solid rgba(246, 196, 92, 0.3);
-      margin-bottom: 32px;
-    }
-
-    .hero img {
-      width: 100%;
-      display: block;
-      object-fit: cover;
-    }
-
-    /* Блок с оффером */
-
-    .intro {
-      margin-bottom: 32px;
-      text-align: center;
-    }
-
-    .intro-title {
-      font-size: 26px;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-
-    .intro-sub {
-      font-size: 15px;
-      color: #d5c7a4;
-    }
-
-    /* Карточки сервисов */
-
-    .cards {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 24px;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+      gap: 32px;
+      align-items: center;
       margin-bottom: 40px;
     }
 
+    .hero-text h1 {
+      font-size: clamp(28px, 4vw, 40px);
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .hero-text h1 span {
+      color: var(--gold);
+    }
+
+    .hero-subtitle {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .badge {
+      border-radius: 999px;
+      border: 1px solid rgba(255, 196, 69, 0.35);
+      padding: 6px 12px;
+      font-size: 12px;
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--gold);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-size: 14px;
+      font-weight: 500;
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s ease, transform 0.1s ease,
+        box-shadow 0.2s ease, border-color 0.2s ease;
+      background: transparent;
+      color: var(--text);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #ffcf52, #f2b63b);
+      color: #200b00;
+      box-shadow: 0 0 18px rgba(255, 196, 69, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 26px rgba(255, 196, 69, 0.5);
+    }
+
+    .btn-outline {
+      border-color: rgba(255, 196, 69, 0.5);
+      background: rgba(0, 0, 0, 0.35);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 196, 69, 0.06);
+      border-color: rgba(255, 196, 69, 0.85);
+    }
+
+    .btn-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      border: 1px solid currentColor;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+    }
+
+    .hero-media {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-header-img {
+      width: 100%;
+      max-width: 420px;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 196, 69, 0.35);
+      box-shadow: 0 0 26px rgba(0, 0, 0, 0.75);
+    }
+
+    .hero-header-img img {
+      width: 100%;
+      display: block;
+    }
+
+    .hero-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .hero-logo img {
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 196, 69, 0.3);
+    }
+
+    /* SECTION TITLE */
+
+    .section-title {
+      margin: 10px 0 20px;
+    }
+
+    .section-title h2 {
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+
+    .section-title p {
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 640px;
+    }
+
+    /* CARDS */
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-media {
+        order: -1;
+      }
+      .cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 650px) {
+      .cards-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
     .card {
-      background: var(--card-bg);
+      background: linear-gradient(145deg, #090909, #050505);
       border-radius: 18px;
-      border: 1px solid rgba(246, 196, 92, 0.3);
-      padding: 14px 14px 18px;
+      border: 1px solid rgba(255, 196, 69, 0.18);
+      padding: 14px 14px 16px;
+      cursor: pointer;
       display: flex;
       flex-direction: column;
       gap: 10px;
-      cursor: pointer;
-      transition: transform 0.15s ease, box-shadow 0.15s ease,
-        border-color 0.15s ease;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.2s ease, transform 0.1s ease,
+        box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      opacity: 0;
+      background: radial-gradient(
+        circle at top,
+        rgba(255, 196, 69, 0.18),
+        transparent 55%
+      );
+      transition: opacity 0.2s ease;
+      pointer-events: none;
     }
 
     .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.6);
-      border-color: var(--gold-soft);
+      background: var(--card-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 0 24px rgba(0, 0, 0, 0.8);
+      border-color: rgba(255, 196, 69, 0.4);
+    }
+
+    .card:hover::before {
+      opacity: 1;
     }
 
     .card-image {
       border-radius: 14px;
       overflow: hidden;
-      background: #000;
-      aspect-ratio: 4 / 3;
+      border: 1px solid rgba(255, 196, 69, 0.3);
+      background: radial-gradient(circle at top, #1a1a1a, #000);
+      max-height: 180px;
     }
 
     .card-image img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
       display: block;
+      object-fit: cover;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
     }
 
     .card-title {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 600;
-      color: var(--gold);
     }
 
-    .card-text {
-      font-size: 14px;
-      color: #d7c9aa;
+    .card-desc-preview {
+      margin-top: 2px;
+      font-size: 12px;
+      color: var(--muted);
     }
 
-    /* Низ страницы */
+    .card-toggle-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 196, 69, 0.6);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .card-toggle-icon span {
+      transition: transform 0.15s ease;
+    }
+
+    .card.open .card-toggle-icon span {
+      transform: rotate(90deg);
+    }
+
+    .card-body {
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--muted);
+      margin-top: 6px;
+      border-top: 1px dashed rgba(255, 196, 69, 0.24);
+      padding-top: 8px;
+      display: none;
+    }
+
+    .card.open .card-body {
+      display: block;
+    }
+
+    .card-body p + p {
+      margin-top: 6px;
+    }
+
+    .card-price {
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--gold-soft);
+      font-weight: 500;
+    }
+
+    .card-price span {
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    /* FOOTER */
 
     .footer {
+      border-top: 1px solid rgba(255, 196, 69, 0.18);
+      margin-top: 36px;
+      padding-top: 12px;
       font-size: 12px;
-      color: #8b8168;
-      border-top: 1px solid rgba(246, 196, 92, 0.18);
-      padding-top: 14px;
+      color: var(--muted);
       display: flex;
-      justify-content: space-between;
-      gap: 10px;
       flex-wrap: wrap;
+      gap: 8px;
+      justify-content: space-between;
     }
 
-    /* Адаптив */
-
-    @media (max-width: 900px) {
-      .cards {
-        grid-template-columns: 1fr;
-      }
-
-      .header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .intro-title {
-        font-size: 22px;
-      }
+    .footer span {
+      opacity: 0.9;
     }
   </style>
 </head>
 <body>
   <div class="page">
-    <!-- Шапка -->
-    <header class="header">
-      <div class="brand">
-        <div class="brand-logo">
-          <img src="ai-bar-logo.png.jpg" alt="AI-BAR логотип" />
-        </div>
-        <div class="brand-text">
-          <div class="brand-text-title">AI-BAR</div>
-          <div class="brand-text-sub">
-            Автоматизации для бизнеса без кода
+    <!-- HERO -->
+    <header class="hero">
+      <div class="hero-text">
+        <h1>
+          <span>AI-BAR</span> — автоматизации для бизнеса без кода
+        </h1>
+        <p class="hero-subtitle">
+          Настраиваем чат-ботов и сценарии в Make и n8n, которые экономят время,
+          снимают рутину с команды и дают руководителю понятные отчёты по
+          цифрам.
+        </p>
+
+        <div class="hero-badges">
+          <div class="badge">
+            <span class="badge-dot"></span>
+            Telegram-боты, GPT-ассистенты, Google Sheets
           </div>
+          <div class="badge">
+            <span class="badge-dot"></span>
+            Работаем с кафе, салонами, отелями и онлайн-проектами
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <a
+            href="https://t.me/Bar_Suppor"
+            target="_blank"
+            class="btn btn-primary"
+          >
+            <span class="btn-icon">TG</span>
+            <span>Написать нам в Telegram</span>
+          </a>
+
+          <a
+            href="https://www.youtube.com/@Ai-Bar-content"
+            target="_blank"
+            class="btn btn-outline"
+          >
+            <span class="btn-icon">YT</span>
+            <span>Наш YouTube</span>
+          </a>
         </div>
       </div>
 
-      <!-- Поменяешь ссылку на свой Telegram позже -->
-      <a href="https://t.me/your_telegram" class="cta-btn" target="_blank">
-        Написать нам в Telegram
-      </a>
+      <div class="hero-media">
+        <div class="hero-header-img">
+          <img
+            src="ai-bar-header.png.png"
+            alt="AI-BAR — автоматизация бизнес-процессов"
+          />
+        </div>
+        <div class="hero-logo">
+          <img src="ai-bar-logo.png.jpg" alt="Логотип AI-BAR" />
+          <div>
+            <div style="font-size: 13px; color: var(--gold-soft); font-weight:600;">
+              AI-BAR — no-code автоматизации
+            </div>
+            <div>Make • n8n • Telegram-боты • GPT-ассистенты</div>
+          </div>
+        </div>
+      </div>
     </header>
 
-    <!-- Большая картинка бара -->
-    <section class="hero">
-      <img src="ai-bar-header.png.png" alt="AI-BAR — no code automation" />
+    <!-- PROJECTS SECTION -->
+    <section>
+      <div class="section-title">
+        <h2>Примеры автоматизаций на Make</h2>
+        <p>
+          Карточки открываются по клику: внутри — краткое описание того, как
+          работает сценарий, и ориентировочная стоимость внедрения. Точную
+          цену мы считаем под ваши процессы.
+        </p>
+      </div>
+
+      <div class="cards-grid">
+        <!-- 1. Учёт накладных и анализ цен и затрат -->
+        <article class="card" data-card>
+          <div class="card-image">
+            <img
+              src="invoice_flow.png.png"
+              alt="Автоматизация учёта накладных и анализа цен"
+            />
+          </div>
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">
+                Учёт накладных и анализ цен и затрат
+              </h3>
+              <p class="card-desc-preview">
+                Фото накладной → таблица → отчёты по закупкам и ценам.
+              </p>
+            </div>
+            <div class="card-toggle-icon">
+              <span>&gt;</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <p>
+              Сотрудник просто фотографирует накладную и отправляет её в
+              Telegram-бота. Сценарий в Make распознаёт позиции, цены, суммы и
+              поставщика и автоматически заносит всё в Google Sheets — без
+              ручного набора.
+            </p>
+            <p>
+              Для руководителя формируются еженедельные и ежемесячные отчёты:
+              сколько и у кого закупили, как меняются цены, какие позиции дают
+              основную долю затрат. После правок в таблице бот собирает
+              аккуратный Google-документ «отчёт по закупкам» для печати или
+              отправки бухгалтеру.
+            </p>
+            <p class="card-price">
+              Примерная стоимость внедрения: <strong>от 500&nbsp;€</strong>.
+              <span>
+                Точную цену рассчитаем после обсуждения объёма номенклатуры и
+                текущих процессов.
+              </span>
+            </p>
+          </div>
+        </article>
+
+        <!-- 2. ИИ-ассистент для Instagram -->
+        <article class="card" data-card>
+          <div class="card-image">
+            <img
+              src="insta_gpt.png.png"
+              alt="ИИ-ассистент для Instagram"
+            />
+          </div>
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">ИИ-ассистент для Instagram</h3>
+              <p class="card-desc-preview">
+                Автопостинг и ответы на комментарии из вашей базы знаний.
+              </p>
+            </div>
+            <div class="card-toggle-icon">
+              <span>&gt;</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <p>
+              Посты и сторис публикуются автоматически по расписанию. Мы
+              загружаем в ассистента базу знаний: ваши услуги, скрипты, ответы
+              на часто задаваемые вопросы, тон общения с аудиторией.
+            </p>
+            <p>
+              Бот сам отвечает на комментарии и сообщения в Direct, опираясь
+              именно на эту базу знаний и ваши правила общения. При сложных
+              вопросах он аккуратно передаёт диалог менеджеру.
+            </p>
+            <p>
+              Все отзывы и вопросы собираются в таблицу: ассистент на основе
+              этих данных показывает, что чаще всего хвалят, а где есть
+              повторяющиеся возражения и точки роста.
+            </p>
+            <p class="card-price">
+              Примерная стоимость внедрения: <strong>от 300&nbsp;€</strong>.
+              <span>
+                Финальная стоимость зависит от объёма базы знаний и количества
+                аккаунтов.
+              </span>
+            </p>
+          </div>
+        </article>
+
+        <!-- 3. Автоматизация задач и отчётов для персонала -->
+        <article class="card" data-card>
+          <div class="card-image">
+            <img
+              src="task_automation.png.png"
+              alt="Автоматизация задач и отчётов для персонала"
+            />
+          </div>
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">
+                Автоматизация задач и отчётов для персонала
+              </h3>
+              <p class="card-desc-preview">
+                Бот раздаёт задачи стажёрам и собирает отчёты сам.
+              </p>
+            </div>
+            <div class="card-toggle-icon">
+              <span>&gt;</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <p>
+              Менеджер один раз заводит задания по дням в Google-таблицу.
+              Сценарий в Make каждый день отправляет персоналу или стажёрам их
+              персональный список задач в Telegram-бота.
+            </p>
+            <p>
+              В конце дня сотрудники отправляют отчёт прямо в бота: что
+              сделано, какие есть вопросы и результаты. Бот складывает все
+              ответы в таблицу — по каждому человеку и каждому дню.
+            </p>
+            <p>
+              Руководителю больше не нужно обзванивать всех по очереди: вся
+              картина видна в одном месте, можно быстро заметить «просевшие»
+              дни и сотрудников, которым нужна помощь.
+            </p>
+            <p class="card-price">
+              Примерная стоимость внедрения: <strong>от 400&nbsp;€</strong>.
+              <span>
+                Итоговая цена зависит от количества ролей и веток сценария.
+              </span>
+            </p>
+          </div>
+        </article>
+
+        <!-- 4. Корпоративный ассистент для руководителя -->
+        <article class="card" data-card>
+          <div class="card-image">
+            <img
+              src="corporate_assistant.png"
+              alt="Корпоративный ассистент для руководителя"
+            />
+          </div>
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">
+                Корпоративный ассистент для руководителя
+              </h3>
+              <p class="card-desc-preview">
+                База знаний компании, которая отвечает сотрудникам вместо шефа.
+              </p>
+            </div>
+            <div class="card-toggle-icon">
+              <span>&gt;</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <p>
+              Руководитель один раз загружает свои регламенты, инструкции,
+              ответы на типовые вопросы и бизнес-логику в ассистента — по сути,
+              создаёт корпоративную базу знаний.
+            </p>
+            <p>
+              Сотрудники задают вопросы ассистенту в чате: «как оформить
+              возврат», «какой тариф предложить этому клиенту», «что делать, если
+              …». GPT-ассистент отвечает сразу, опираясь на эту базу знаний, и
+              не отвлекает шефа по мелочам.
+            </p>
+            <p>
+              В сложных или нестандартных случаях ассистент честно признаётся,
+              что нужен человек, и предлагает передать вопрос руководителю или
+              ответственному менеджеру.
+            </p>
+            <p class="card-price">
+              Примерная стоимость внедрения: <strong>от 300&nbsp;€</strong>.
+              <span>
+                Стоимость зависит от объёма документов и требований к точности
+                ответов.
+              </span>
+            </p>
+          </div>
+        </article>
+
+        <!-- 5. Бот-секретарь -->
+        <article class="card" data-card>
+          <div class="card-image">
+            <img
+              src="voice_secretary_bot.png"
+              alt="Бот-секретарь для ведения контактов и договорённостей"
+            />
+          </div>
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Бот-секретарь</h3>
+              <p class="card-desc-preview">
+                Голосом зафиксировали договорённости — бот всё запомнил.
+              </p>
+            </div>
+            <div class="card-toggle-icon">
+              <span>&gt;</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <p>
+              Руководитель или менеджеры просто надиктовывают боту: с кем
+              общались, о чём договорились, когда нужно связаться ещё раз.
+              Сценарий распознаёт речь и структурирует данные в таблице.
+            </p>
+            <p>
+              В таблице фиксируются: человек или компания, контакты, дата
+              общения, краткое содержание договорённостей, следующий шаг.
+              Ничего не теряется в заметках и мессенджерах.
+            </p>
+            <p>
+              По запросу «покажи всё по компании N» бот выдаёт сводку по этому
+              человеку или фирме. Каждое утро он напоминает о сегодняшних
+              встречах и звонках, чтобы важные контакты не выпадали из поля
+              зрения.
+            </p>
+            <p class="card-price">
+              Примерная стоимость внедрения: <strong>от 500&nbsp;€</strong>.
+              <span>
+                Итоговая цена зависит от числа пользователей и глубины отчётности.
+              </span>
+            </p>
+          </div>
+        </article>
+
+        <!-- 6. Бронирование и продажа доп. услуг в отеле -->
+        <article class="card" data-card>
+          <div class="card-image">
+            <img
+              src="hotel_services_booking.png"
+              alt="Бронирование номеров и дополнительных услуг в отеле"
+            />
+          </div>
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">
+                Бронирование и продажа доп. услуг в отеле
+              </h3>
+              <p class="card-desc-preview">
+                Бот принимает заявки на номера, трансферы, экскурсии и собиает все данные.
+              </p>
+            </div>
+            <div class="card-toggle-icon">
+              <span>&gt;</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <p>
+              Гости общаются с отелем через удобного Telegram-бота: запрашивают
+              свободные номера, бронируют трансфер, экскурсии, спа и другие
+              услуги. Все заявки сразу попадают в таблицу, где персонал видит
+              их в режиме реального времени.
+            </p>
+            <p>
+              Бот подбирает подходящий номер, исходя из базы знаний: типы
+              комнат, цены, заполняемость, ограничения по размещению. При
+              необходимости он задаёт уточняющие вопросы и предлагает несколько
+              вариантов.
+            </p>
+            <p>
+              Одновременно бот собирает всю нужную информацию о госте:
+              ФИО, даты заезда и выезда, количество человек, контакты,
+              пожелания по размещению и доп. услугам. Менеджеру остаётся только
+              подтвердить бронь и принять оплату.
+            </p>
+            <p class="card-price">
+              Примерная стоимость внедрения:
+              <strong> от 800&nbsp;€</strong>. <span>
+                Финальная сумма зависит от количества услуг, языков и глубины
+                интеграции с PMS.
+              </span>
+            </p>
+          </div>
+        </article>
+      </div>
     </section>
 
-    <!-- Оффер -->
-    <section class="intro">
-      <h1 class="intro-title">
-        Настраиваем чат-ботов и сценарии в Make и n8n
-      </h1>
-      <p class="intro-sub">
-        Экономим время и деньги, автоматизируя рутину в кафе, салонах,
-        магазинах и онлайн-проектах.
-      </p>
-    </section>
-
-    <!-- Карточки: три наших кейса -->
-    <section class="cards">
-      <!-- 1. Учёт накладных -->
-      <article class="card">
-        <div class="card-image">
-          <img src="invoice_flow.png.png" alt="Учёт накладных" />
-        </div>
-        <div class="card-title">
-          Учёт накладных и анализ цен и затрат
-        </div>
-        <div class="card-text">
-          Накладные фотографируют в Telegram, данные автоматически попадают
-          в Google Sheets — без ручного ввода.
-        </div>
-      </article>
-
-      <!-- 2. ИИ-ассистент для Instagram -->
-      <article class="card">
-        <div class="card-image">
-          <img src="insta_gpt.png.png" alt="ИИ-ассистент для Instagram" />
-        </div>
-        <div class="card-title">
-          ИИ-ассистент для Instagram
-        </div>
-        <div class="card-text">
-          Автопостинг, ответы на комментарии и анализ отзывов по базе знаний
-          компании.
-        </div>
-      </article>
-
-      <!-- 3. Задачи и отчёты персонала -->
-      <article class="card">
-        <div class="card-image">
-          <img src="task_automation.png.png" alt="Задачи и отчёты персонала" />
-        </div>
-        <div class="card-title">
-          Автоматизация задач и отчётов для персонала
-        </div>
-        <div class="card-text">
-          Менеджер заносит задачи в таблицу, бот отправляет их стажёрам и
-          собирает отчёты обратно в Google Sheets.
-        </div>
-      </article>
-    </section>
-
+    <!-- FOOTER -->
     <footer class="footer">
       <span>© AI-BAR, 2025</span>
       <span>Make • n8n • Telegram-боты • GPT-ассистенты</span>
     </footer>
   </div>
+
+  <script>
+    // Раскрытие/сворачивание карточек по клику
+    document.querySelectorAll("[data-card]").forEach((card) => {
+      card.addEventListener("click", () => {
+        card.classList.toggle("open");
+      });
+    });
+  </script>
 </body>
 </html>
