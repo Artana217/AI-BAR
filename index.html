@@ -1,11 +1,306 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>AI-BAR</title>
-  </head>
-  <body>
-    <h1>AI-BAR сайт работает!</h1>
-    <p>Привет 👋 Это тестовая страница.</p>
-  </body>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI-BAR — автоматизации для бизнеса без кода</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #050505;
+      --gold: #f6c45c;
+      --gold-soft: #f2b94a;
+      --text: #f7f2e9;
+      --card-bg: #101010;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 24px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    /* Шапка */
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand-logo {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid var(--gold);
+      flex-shrink: 0;
+    }
+
+    .brand-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .brand-text-title {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    .brand-text-sub {
+      font-size: 14px;
+      color: #c6b896;
+    }
+
+    .cta-btn {
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 10px 20px;
+      border-radius: 999px;
+      font-size: 14px;
+      background: transparent;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, transform 0.1s;
+      white-space: nowrap;
+    }
+
+    .cta-btn:hover {
+      background: var(--gold);
+      color: #000;
+      transform: translateY(-1px);
+    }
+
+    /* Хедер-картинка */
+
+    .hero {
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(246, 196, 92, 0.3);
+      margin-bottom: 32px;
+    }
+
+    .hero img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* Блок с оффером */
+
+    .intro {
+      margin-bottom: 32px;
+      text-align: center;
+    }
+
+    .intro-title {
+      font-size: 26px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .intro-sub {
+      font-size: 15px;
+      color: #d5c7a4;
+    }
+
+    /* Карточки сервисов */
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 18px;
+      border: 1px solid rgba(246, 196, 92, 0.3);
+      padding: 14px 14px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease,
+        border-color 0.15s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.6);
+      border-color: var(--gold-soft);
+    }
+
+    .card-image {
+      border-radius: 14px;
+      overflow: hidden;
+      background: #000;
+      aspect-ratio: 4 / 3;
+    }
+
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--gold);
+    }
+
+    .card-text {
+      font-size: 14px;
+      color: #d7c9aa;
+    }
+
+    /* Низ страницы */
+
+    .footer {
+      font-size: 12px;
+      color: #8b8168;
+      border-top: 1px solid rgba(246, 196, 92, 0.18);
+      padding-top: 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* Адаптив */
+
+    @media (max-width: 900px) {
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .intro-title {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- Шапка -->
+    <header class="header">
+      <div class="brand">
+        <div class="brand-logo">
+          <img src="ai-bar-logo.png.jpg" alt="AI-BAR логотип" />
+        </div>
+        <div class="brand-text">
+          <div class="brand-text-title">AI-BAR</div>
+          <div class="brand-text-sub">
+            Автоматизации для бизнеса без кода
+          </div>
+        </div>
+      </div>
+
+      <!-- Поменяешь ссылку на свой Telegram позже -->
+      <a href="https://t.me/your_telegram" class="cta-btn" target="_blank">
+        Написать нам в Telegram
+      </a>
+    </header>
+
+    <!-- Большая картинка бара -->
+    <section class="hero">
+      <img src="ai-bar-header.png.png" alt="AI-BAR — no code automation" />
+    </section>
+
+    <!-- Оффер -->
+    <section class="intro">
+      <h1 class="intro-title">
+        Настраиваем чат-ботов и сценарии в Make и n8n
+      </h1>
+      <p class="intro-sub">
+        Экономим время и деньги, автоматизируя рутину в кафе, салонах,
+        магазинах и онлайн-проектах.
+      </p>
+    </section>
+
+    <!-- Карточки: три наших кейса -->
+    <section class="cards">
+      <!-- 1. Учёт накладных -->
+      <article class="card">
+        <div class="card-image">
+          <img src="invoice_flow.png.png" alt="Учёт накладных" />
+        </div>
+        <div class="card-title">
+          Учёт накладных и анализ цен и затрат
+        </div>
+        <div class="card-text">
+          Накладные фотографируют в Telegram, данные автоматически попадают
+          в Google Sheets — без ручного ввода.
+        </div>
+      </article>
+
+      <!-- 2. ИИ-ассистент для Instagram -->
+      <article class="card">
+        <div class="card-image">
+          <img src="insta_gpt.png.png" alt="ИИ-ассистент для Instagram" />
+        </div>
+        <div class="card-title">
+          ИИ-ассистент для Instagram
+        </div>
+        <div class="card-text">
+          Автопостинг, ответы на комментарии и анализ отзывов по базе знаний
+          компании.
+        </div>
+      </article>
+
+      <!-- 3. Задачи и отчёты персонала -->
+      <article class="card">
+        <div class="card-image">
+          <img src="task_automation.png.png" alt="Задачи и отчёты персонала" />
+        </div>
+        <div class="card-title">
+          Автоматизация задач и отчётов для персонала
+        </div>
+        <div class="card-text">
+          Менеджер заносит задачи в таблицу, бот отправляет их стажёрам и
+          собирает отчёты обратно в Google Sheets.
+        </div>
+      </article>
+    </section>
+
+    <footer class="footer">
+      <span>© AI-BAR, 2025</span>
+      <span>Make • n8n • Telegram-боты • GPT-ассистенты</span>
+    </footer>
+  </div>
+</body>
 </html>
