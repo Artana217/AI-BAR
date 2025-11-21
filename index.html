@@ -4,55 +4,19 @@
   <meta charset="UTF-8" />
   <title>AI-BAR — автоматизации для бизнеса без кода</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <style>
     :root {
       --bg: #050505;
+      --text: #f7f2e9;
+      --muted: #b6a88a;
       --gold: #ffc445;
       --gold-soft: #f2b94a;
-      --text: #f7f2e9;
       --card-bg: #101010;
       --card-hover: #181818;
-      --muted: #b6a88a;
       --accent: #23a473;
       --danger: #ff6b6b;
     }
-
-    /* Кнопки “надписи” без контура */
-.hero-badges .badge {
-  background: none;
-  border: none;
-  padding: 0;
-  font-size: 16px;
-  color: var(--gold-soft);
-}
-
-/* Центрирование трёх кнопок */
-.hero-actions--center {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 20px;
-}
-
-/* Бледно-желтые кнопки Telegram и YouTube */
-.btn.btn-gold {
-  background: rgba(255, 196, 69, 0.15);
-  border: 1px solid var(--gold);
-  padding: 12px 20px;
-  border-radius: 10px;
-  color: var(--gold);
-  font-weight: 600;
-}
-
-/* Зелёная кнопка ассистента */
-.btn.btn-green {
-  background: rgba(35, 164, 115, 0.15);
-  border: 1px solid var(--accent);
-  padding: 12px 20px;
-  border-radius: 10px;
-  color: var(--accent);
-  font-weight: 600;
-}
 
     * {
       box-sizing: border-box;
@@ -61,16 +25,10 @@
     }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        Roboto, sans-serif;
-      background: radial-gradient(circle at top, #202020 0, #000 55%);
-      color: var(--text);
       min-height: 100vh;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #151515 0, #050505 50%, #000 100%);
+      color: var(--text);
     }
 
     .page {
@@ -79,20 +37,23 @@
       padding: 32px 16px 64px;
     }
 
-    /* HEADER */
+    /* ---------- HERO ---------- */
 
     .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+      display: flex;
+      flex-direction: column;
       gap: 32px;
-      align-items: center;
-      margin-bottom: 40px;
+    }
+
+    .hero-text {
+      max-width: 900px;
     }
 
     .hero-text h1 {
-      font-size: clamp(28px, 4vw, 40px);
-      line-height: 1.2;
-      margin-bottom: 12px;
+      font-size: clamp(36px, 5vw, 54px);
+      line-height: 1.05;
+      letter-spacing: 0.02em;
+      margin-bottom: 16px;
     }
 
     .hero-text h1 span {
@@ -100,322 +61,199 @@
     }
 
     .hero-subtitle {
-      font-size: 16px;
+      font-size: 18px;
+      line-height: 1.6;
       color: var(--muted);
-      max-width: 520px;
-      line-height: 1.5;
+      max-width: 720px;
       margin-bottom: 20px;
     }
 
-    .hero-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 24px;
+    .hero-list {
+      list-style: none;
+      margin-bottom: 8px;
     }
 
-    .badge {
-      border-radius: 999px;
-      border: 1px solid rgba(255, 196, 69, 0.35);
-      padding: 6px 12px;
-      font-size: 12px;
-      color: var(--muted);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .badge-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: var(--gold);
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .btn {
-      border-radius: 999px;
-      padding: 10px 18px;
-      font-size: 14px;
-      font-weight: 500;
-      border: 1px solid transparent;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: background 0.2s ease, transform 0.1s ease,
-        box-shadow 0.2s ease, border-color 0.2s ease;
-      background: transparent;
-      color: var(--text);
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #ffcf52, #f2b63b);
-      color: #200b00;
-      box-shadow: 0 0 18px rgba(255, 196, 69, 0.35);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 0 26px rgba(255, 196, 69, 0.5);
-    }
-
-    .btn-outline {
-      border-color: rgba(255, 196, 69, 0.5);
-      background: rgba(0, 0, 0, 0.35);
-    }
-
-    .btn-outline:hover {
-      background: rgba(255, 196, 69, 0.06);
-      border-color: rgba(255, 196, 69, 0.85);
-    }
-
-    .btn-icon {
-      width: 18px;
-      height: 18px;
-      border-radius: 999px;
-      border: 1px solid currentColor;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
+    .hero-list li {
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--gold-soft);
     }
 
     .hero-media {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 12px;
+      gap: 24px;
     }
 
-    .hero-header-img {
-      width: 100%;
-      max-width: 420px;
-      border-radius: 24px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 196, 69, 0.35);
-      box-shadow: 0 0 26px rgba(0, 0, 0, 0.75);
-    }
+    /* Широкое фото бара */
 
     .hero-header-img img {
-      width: 100%;
       display: block;
+      width: 100%;
+      max-width: 1200px;
+      margin: 24px auto 16px;
+      border-radius: 24px;
+      object-fit: cover;
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.8);
+    }
+
+    /* Кнопки */
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 24px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: transparent;
+      color: var(--text);
+      font-size: 15px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease,
+        border-color 0.2s ease;
+      outline: none;
+    }
+
+    .btn span.btn-icon {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    .btn-gold {
+      background: radial-gradient(circle at top, var(--gold) 0, var(--gold-soft) 60%, #c78a26 100%);
+      color: #1b1205;
+      border-color: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.9);
+    }
+
+    /* Зелёная подсветка именно для ассистента */
+
+    .btn-ai {
+      background: rgba(61, 220, 132, 0.16);
+      border-color: rgba(61, 220, 132, 0.65);
+      box-shadow: 0 0 0 1px rgba(61, 220, 132, 0.4);
+    }
+
+    .btn-ai:hover {
+      background: rgba(61, 220, 132, 0.22);
+      box-shadow: 0 22px 45px rgba(61, 220, 132, 0.5);
+      transform: translateY(-1px);
     }
 
     .hero-logo {
       display: flex;
       align-items: center;
-      gap: 10px;
-      color: var(--muted);
-      font-size: 13px;
+      gap: 16px;
+      margin-top: 8px;
     }
 
     .hero-logo img {
-      width: 44px;
-      height: 44px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 196, 69, 0.3);
+      height: 52px;
+      width: auto;
     }
 
-    /* SECTION TITLE */
+    .hero-logo-main {
+      font-size: 13px;
+      color: var(--gold-soft);
+      font-weight: 600;
+    }
+
+    .hero-logo-sub {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* ---------- PROJECTS / CARDS ---------- */
 
     .section-title {
-      margin: 10px 0 20px;
+      margin-top: 56px;
+      margin-bottom: 16px;
     }
 
     .section-title h2 {
-      font-size: 20px;
-      margin-bottom: 6px;
+      font-size: 26px;
+      margin-bottom: 8px;
     }
 
     .section-title p {
-      font-size: 14px;
       color: var(--muted);
-      max-width: 640px;
+      font-size: 15px;
+      max-width: 720px;
+      line-height: 1.6;
     }
-
-    /* CARDS */
 
     .cards-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 20px;
-    }
-
-    @media (max-width: 900px) {
-      .hero {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .hero-media {
-        order: -1;
-      }
-      .cards-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 650px) {
-      .cards-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
+      margin-top: 24px;
     }
 
     .card {
-      background: linear-gradient(145deg, #090909, #050505);
-      border-radius: 18px;
-      border: 1px solid rgba(255, 196, 69, 0.18);
-      padding: 14px 14px 16px;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      position: relative;
-      overflow: hidden;
-      transition: background 0.2s ease, transform 0.1s ease,
-        box-shadow 0.2s ease, border-color 0.2s ease;
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      opacity: 0;
-      background: radial-gradient(
-        circle at top,
-        rgba(255, 196, 69, 0.18),
-        transparent 55%
-      );
-      transition: opacity 0.2s ease;
-      pointer-events: none;
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 18px 18px 20px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: background 0.2s ease, transform 0.1s ease, border-color 0.2s ease;
     }
 
     .card:hover {
       background: var(--card-hover);
-      transform: translateY(-1px);
-      box-shadow: 0 0 24px rgba(0, 0, 0, 0.8);
-      border-color: rgba(255, 196, 69, 0.4);
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.18);
     }
 
-    .card:hover::before {
-      opacity: 1;
-    }
-
-    .card-image {
-      border-radius: 14px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 196, 69, 0.3);
-      background: radial-gradient(circle at top, #1a1a1a, #000);
-      max-height: 180px;
-    }
-
-    .card-image img {
-      width: 100%;
-      display: block;
-      object-fit: cover;
-    }
-
-    .card-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 8px;
-    }
-
-    .card-title {
-      font-size: 15px;
-      font-weight: 600;
-    }
-
-    .card-desc-preview {
-      margin-top: 2px;
-      font-size: 12px;
+    .card-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
       color: var(--muted);
+      margin-bottom: 4px;
     }
 
-    .card-toggle-icon {
-      width: 20px;
-      height: 20px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 196, 69, 0.6);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      flex-shrink: 0;
-      margin-top: 1px;
-      background: rgba(0, 0, 0, 0.6);
+    .card h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
     }
 
-    .card-toggle-icon span {
-      transition: transform 0.15s ease;
-    }
-
-    .card.open .card-toggle-icon span {
-      transform: rotate(90deg);
-    }
-
-    .card-body {
-      font-size: 13px;
-      line-height: 1.55;
+    .card p {
+      font-size: 14px;
       color: var(--muted);
-      margin-top: 6px;
-      border-top: 1px dashed rgba(255, 196, 69, 0.24);
-      padding-top: 8px;
-      display: none;
-    }
-
-    .card.open .card-body {
-      display: block;
-    }
-
-    .card-body p + p {
-      margin-top: 6px;
+      line-height: 1.6;
+      margin-bottom: 10px;
     }
 
     .card-price {
-      margin-top: 8px;
-      font-size: 12px;
+      font-size: 13px;
       color: var(--gold-soft);
-      font-weight: 500;
     }
 
-    .card-price span {
-      color: var(--muted);
-      font-weight: 400;
+    @media (max-width: 720px) {
+      .page {
+        padding: 20px 12px 48px;
+      }
+
+      .hero-logo {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
-
-    /* FOOTER */
-
-    .footer {
-      border-top: 1px solid rgba(255, 196, 69, 0.18);
-      margin-top: 36px;
-      padding-top: 12px;
-      font-size: 12px;
-      color: var(--muted);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      justify-content: space-between;
-    }
-
-    .footer span {
-      opacity: 0.9;
-    }
-    /* Картинка бара на всю ширину */
-.hero-header-img img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 0;
-  margin: 0 auto;
-  max-width: 100%;
-}
-
   </style>
 </head>
 <body>
@@ -426,92 +264,125 @@
         <h1>
           <span>AI-BAR</span> — автоматизации для бизнеса без кода
         </h1>
+
         <p class="hero-subtitle">
-          Настраиваем чат-ботов и сценарии в Make и n8n, которые экономят время,
-          снимают рутину с команды и дают руководителю понятные отчёты по
-          цифрам.
+          Настраиваем чат-ботов и сценарии в Make и n8n, которые экономят время, снимают
+          рутину с команды и дают руководителю понятные отчёты по цифрам.
         </p>
 
-            <!-- Бэйджи под заголовком -->
-      <div class="hero-badges">
-        <div class="badge">
-          <span class="badge-dot"></span>
-          Telegram-боты, GPT-ассистенты, Google Sheets
-        </div>
-        <div class="badge">
-          <span class="badge-dot"></span>
-          Подберём автоматизацию под любой бизнес
-        </div>
+        <ul class="hero-list">
+          <li>Telegram-боты, GPT-ассистенты, Google Sheets</li>
+          <li>Подберём автоматизацию под любой бизнес</li>
+        </ul>
       </div>
 
-      <!-- Картинка бара на всю ширину -->
       <div class="hero-media">
+        <!-- широкое фото бара -->
         <div class="hero-header-img">
           <img
             src="ai-bar-header.png.png"
             alt="AI-BAR — автоматизация бизнес-процессов"
           />
         </div>
-      </div>
 
-      <!-- Три одинаковые кнопки по центру -->
-      <div class="hero-actions hero-actions--center">
-        <a
-          href="https://t.me/Bar_Suppor"
-          target="_blank"
-          class="btn btn-gold"
-        >
-          <span class="btn-icon">TG</span>
-          <span>Написать нам в Telegram</span>
-        </a>
-
-        <a
-          href="https://www.youtube.com/@Ai-Bar-content"
-          target="_blank"
-          class="btn btn-gold"
-        >
-          <span class="btn-icon">YT</span>
-          <span>Наш YouTube</span>
-        </a>
-
-        <button
-          class="btn btn-ai"
-          id="ai-assistant-open"
-          type="button"
-        >
-          <span class="btn-icon">AI</span>
-          <span>Консультация у ИИ-ассистента</span>
-        </button>
-      </div>
-
-      <!-- Лого и подпись под кнопками -->
-      <div class="hero-logo">
-        <img src="ai-bar-logo.png.jpg" alt="Логотип AI-BAR" />
-        <div>
-          <div
-            style="font-size: 13px; color: var(--gold-soft); font-weight: 600;"
+        <!-- три кнопки по центру -->
+        <div class="hero-actions">
+          <a
+            href="https://t.me/Bar_Suppor"
+            target="_blank"
+            class="btn btn-gold"
           >
-            /* Зелёная кнопка ассистента */
-.btn.btn-ai,
-.btn.btn-ai:visited {
-  border-color: #3ddc84;
-  color: #3ddc84;
-  background: transparent;
-}
+            <span class="btn-icon">TG</span>
+            <span>Написать нам в Telegram</span>
+          </a>
 
-.btn.btn-ai:hover {
-  background: rgba(61, 220, 132, 0.12);
-  box-shadow: 0 0 22px rgba(61, 220, 132, 0.45);
-}
+          <a
+            href="https://www.youtube.com/@Ai-Bar-content"
+            target="_blank"
+            class="btn btn-gold"
+          >
+            <span class="btn-icon">YT</span>
+            <span>Наш YouTube</span>
+          </a>
 
-            AI-BAR — no-code автоматизации
+          <button
+            class="btn btn-ai"
+            id="ai-assistant-open"
+            type="button"
+          >
+            <span class="btn-icon">AI</span>
+            <span>Консультация у ИИ-ассистента</span>
+          </button>
+        </div>
+
+        <!-- подпись / логотип под кнопками -->
+        <div class="hero-logo">
+          <img src="ai-bar-logo.png.jpg" alt="Логотип AI-BAR" />
+          <div>
+            <div class="hero-logo-main">AI-BAR — no-code автоматизации</div>
+            <div class="hero-logo-sub">
+              Make • n8n • Telegram-боты • GPT-ассистенты
+            </div>
           </div>
-          <div>Make • n8n • Telegram-боты • GPT-ассистенты</div>
         </div>
       </div>
     </header>
- 
+
     <!-- PROJECTS SECTION -->
+    <section>
+      <div class="section-title">
+        <h2>Примеры автоматизаций на Make</h2>
+        <p>
+          Карточки открываются по клику: внутри — краткое описание того, как работает
+          сценарий, и ориентировочная стоимость внедрения. Точную цену мы считаем под
+          ваши процессы.
+        </p>
+      </div>
+
+      <div class="cards-grid">
+        <!-- 1. Учёт накладных и анализ цен -->
+        <article class="card">
+          <div class="card-tag">Кафе • Учёт закупок</div>
+          <h3>Учёт накладных и анализ цен от поставщиков</h3>
+          <p>
+            Сотрудник фотографирует накладную в Telegram. Сценарий распознаёт позиции,
+            заносит их в Google Sheets, считает сумму закупки и сравнивает цены разных
+            поставщиков.
+          </p>
+          <div class="card-price">от 350–500&nbsp;$ за внедрение</div>
+        </article>
+
+        <!-- 2. Задачи и отчёты для персонала -->
+        <article class="card">
+          <div class="card-tag">Отдел продаж</div>
+          <h3>Задачи и отчёты для стажёров в Telegram</h3>
+          <p>
+            Менеджер заполняет таблицу с задачами. Бот сам рассылает задания по людям,
+            собирает отчёты в конце дня и записывает всё в Google Sheets, чтобы
+            руководитель видел прогресс.
+          </p>
+          <div class="card-price">от 300–450&nbsp;$ за внедрение</div>
+        </article>
+
+        <!-- 3. Бронирование услуг -->
+        <article class="card">
+          <div class="card-tag">Отели / туризм</div>
+          <h3>Бронирование и доп.услуги через бота</h3>
+          <p>
+            Гость выбирает даты, номер и дополнительные услуги прямо в боте. Данные
+            попадают в таблицу и CRM, а администратор получает готовую заявку без
+            переписки в мессенджерах.
+          </p>
+          <div class="card-price">от 400–600&nbsp;$ за внедрение</div>
+        </article>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
+
+
+      <!-- PROJECTS SECTION -->
     <section>
       <div class="section-title">
         <h2>Примеры автоматизаций на Make</h2>
