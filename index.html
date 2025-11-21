@@ -28,7 +28,6 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: radial-gradient(circle at top, #151515 0, #050505 50%, #000 100%);
       color: var(--text);
-      line-height: 1.5;
     }
 
     a {
@@ -48,7 +47,6 @@
       display: flex;
       flex-direction: column;
       gap: 32px;
-      margin-bottom: 40px;
     }
 
     .hero-text {
@@ -101,8 +99,6 @@
       box-shadow: 0 22px 60px rgba(0, 0, 0, 0.8);
     }
 
-    /* Кнопки */
-
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
@@ -122,11 +118,11 @@
       background: transparent;
       color: var(--text);
       font-size: 15px;
+      text-decoration: none;
       cursor: pointer;
       transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease,
         border-color 0.2s ease;
       outline: none;
-      text-decoration: none;
       white-space: nowrap;
     }
 
@@ -146,8 +142,6 @@
       transform: translateY(-1px);
       box-shadow: 0 22px 60px rgba(0, 0, 0, 0.9);
     }
-
-    /* Зелёная подсветка именно для ассистента */
 
     .btn-ai {
       background: rgba(61, 220, 132, 0.16);
@@ -184,43 +178,44 @@
       color: var(--muted);
     }
 
-    /* ---------- CARDS SECTION ---------- */
+    /* ---------- PROJECTS / CARDS ---------- */
 
-    section.automations {
-      margin-top: 16px;
+    .projects-section {
+      margin-top: 56px;
     }
 
     .section-title {
-      font-size: 26px;
-      margin-bottom: 8px;
-      font-weight: 600;
+      margin-bottom: 16px;
     }
 
-    .section-subtitle {
-      font-size: 15px;
+    .section-title h2 {
+      font-size: 26px;
+      margin-bottom: 8px;
+    }
+
+    .section-title p {
       color: var(--muted);
-      margin-bottom: 22px;
+      font-size: 15px;
       max-width: 720px;
       line-height: 1.6;
     }
 
-    .cards {
+    .cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+      margin-top: 24px;
     }
 
     .card {
-      background: radial-gradient(circle at top, #181818 0, #080808 55%);
-      border-radius: 18px;
-      padding: 12px 12px 14px;
-      border: 1px solid rgba(244, 196, 92, 0.18);
-      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.55);
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 16px 16px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: background 0.2s ease, transform 0.1s ease, border-color 0.2s ease;
       cursor: pointer;
       display: flex;
       flex-direction: column;
-      transition: transform 0.14s ease-out, box-shadow 0.14s ease-out,
-        border-color 0.14s ease-out, background 0.14s ease-out;
       position: relative;
       overflow: hidden;
     }
@@ -240,9 +235,9 @@
     }
 
     .card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(244, 196, 92, 0.45);
-      box-shadow: 0 18px 55px rgba(0, 0, 0, 0.8);
+      background: var(--card-hover);
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.18);
     }
 
     .card-image {
@@ -259,21 +254,46 @@
       object-fit: cover;
     }
 
+    .card-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
     .card-title {
-      font-size: 15px;
+      font-size: 17px;
       font-weight: 600;
-      color: var(--gold);
+      margin-bottom: 6px;
+      color: var(--gold-soft);
+    }
+
+    .card-desc-preview {
+      font-size: 14px;
+      color: var(--muted);
       margin-bottom: 6px;
     }
 
-    .card-text {
-      font-size: 14px;
-      color: rgba(247, 242, 233, 0.86);
+    .card-price {
+      font-size: 13px;
+      color: var(--gold-soft);
+      margin-bottom: 6px;
+    }
+
+    .card-body {
       display: none;
       margin-top: 4px;
     }
 
-    .card.expanded .card-text {
+    .card-body p {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+
+    .card.expanded .card-body {
       display: block;
     }
 
@@ -284,7 +304,7 @@
     }
 
     footer {
-      margin-top: 26px;
+      margin-top: 32px;
       font-size: 12px;
       color: rgba(247, 242, 233, 0.55);
       display: flex;
@@ -294,6 +314,14 @@
 
     footer span strong {
       color: var(--gold-soft);
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+
+    @media (max-width: 980px) {
+      .cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
 
     @media (max-width: 720px) {
@@ -306,14 +334,8 @@
         align-items: flex-start;
       }
 
-      .hero-actions {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .btn {
-        justify-content: center;
-        width: 100%;
+      .cards-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -328,8 +350,8 @@
         </h1>
 
         <p class="hero-subtitle">
-          Настраиваем чат-ботов и сценарии в Make и n8n, которые экономят время, снимают
-          рутину с команды и дают руководителю понятные отчёты по цифрам.
+          Настраиваем чат-ботов и сценарии в Make и n8n, которые экономят время,
+          снимают рутину с команды и дают руководителю понятные отчёты по цифрам.
         </p>
 
         <ul class="hero-list">
@@ -364,7 +386,7 @@
             class="btn btn-gold"
           >
             <span class="btn-icon">YT</span>
-            <span>Наш YouTube</span>
+            <span>Наш YouTube-канал</span>
           </a>
 
           <button
@@ -390,28 +412,41 @@
       </div>
     </header>
 
-    <!-- CARDS -->
-    <section class="automations">
-      <h2 class="section-title">Что мы уже автоматизировали</h2>
-      <p class="section-subtitle">
-        Примеры реальных сценариев на Make. По такому же принципу собираем решения под ваш бизнес —
-        с нуля или на базе уже существующих процессов.
-      </p>
+    <!-- PROJECTS / CARDS -->
+    <section class="projects-section" id="projects">
+      <div class="section-title">
+        <h2>Что мы уже автоматизировали</h2>
+        <p>
+          Примеры реальных сценариев на Make. По такому же принципу собираем решения
+          под ваш бизнес — с нуля или на базе уже существующих процессов.
+        </p>
+      </div>
 
-      <div class="cards">
+      <div class="cards-grid">
         <!-- 1. Учет накладных -->
         <article class="card">
           <div class="card-image">
             <img src="invoice_flow.png.png" alt="Учёт накладных и анализ затрат" />
           </div>
+          <div class="card-tag">Кафе • Учёт закупок</div>
           <div class="card-title">Учёт накладных и анализ цен и затрат</div>
-          <div class="card-hint">Нажми, чтобы посмотреть, как работает сценарий</div>
-          <p class="card-text">
-            Сотрудники фотографируют накладные в Telegram. Система распознаёт позиции, заносит их в
-            Google Sheets и автоматически считает суммы по дням, категориям и поставщикам. После
-            проверки и правок из таблицы формируется готовый отчёт в Google Docs — его можно
-            распечатать, подписать или отправить бухгалтеру. Ручного ввода практически не остаётся.
+          <p class="card-desc-preview">
+            Фото накладной → таблица → отчёты по закупкам и ценам.
           </p>
+          <p class="card-price">от 350–500&nbsp;$ за внедрение</p>
+          <p class="card-hint">Нажми, чтобы посмотреть, как работает сценарий</p>
+          <div class="card-body">
+            <p>
+              Сотрудники фотографируют накладные в Telegram. Система распознаёт позиции,
+              заносит их в Google Sheets и автоматически считает суммы по дням,
+              категориям и поставщикам.
+            </p>
+            <p>
+              После проверки и правок из таблицы формируется готовый отчёт в Google Docs —
+              его можно распечатать, подписать или отправить бухгалтеру. Ручного ввода
+              практически не остаётся.
+            </p>
+          </div>
         </article>
 
         <!-- 2. ИИ-ассистент для Instagram -->
@@ -419,14 +454,26 @@
           <div class="card-image">
             <img src="insta_gpt.png.png" alt="ИИ-ассистент для Instagram" />
           </div>
+          <div class="card-tag">Маркетинг • Соцсети</div>
           <div class="card-title">ИИ-ассистент для Instagram</div>
-          <div class="card-hint">Нажми, чтобы узнать, как он общается с подписчиками</div>
-          <p class="card-text">
-            Ассистент сам публикует посты по расписанию и отвечает на комментарии и вопросы в
-            Direct, опираясь на заранее загруженную базу знаний о компании, услугах и акциях. Отзывы
-            клиентов автоматически собираются в таблицу, анализируются и сводятся в отчёт: что
-            чаще всего хвалят, какие возражения повторяются и что имеет смысл улучшить.
+          <p class="card-desc-preview">
+            Автопостинг и ответы на комментарии из вашей базы знаний.
           </p>
+          <p class="card-price">от 300–400&nbsp;$ за внедрение</p>
+          <p class="card-hint">
+            Нажми, чтобы узнать, как он общается с подписчиками
+          </p>
+          <div class="card-body">
+            <p>
+              Ассистент сам публикует посты по расписанию и отвечает на комментарии и вопросы
+              в Direct, опираясь на заранее загруженную базу знаний о компании, услугах и акциях.
+            </p>
+            <p>
+              Отзывы клиентов автоматически собираются в таблицу, анализируются и сводятся
+              в отчёт: что чаще всего хвалят, какие возражения повторяются и что имеет смысл
+              улучшить.
+            </p>
+          </div>
         </article>
 
         <!-- 3. Автоматизация задач и отчётов -->
@@ -434,14 +481,26 @@
           <div class="card-image">
             <img src="task_automation.png.png" alt="Автоматизация задач и отчётов для персонала" />
           </div>
+          <div class="card-tag">Отдел продаж</div>
           <div class="card-title">Автоматизация задач и отчётов для персонала</div>
-          <div class="card-hint">Нажми, чтобы увидеть, как исчезают созвоны «на отчёт»</div>
-          <p class="card-text">
-            Менеджер заносит задачи по дням в таблицу — бот сам рассылает их стажёрам и сотрудникам
-            в Telegram. В конце дня каждый отвечает боту коротким отчётом, и данные автоматически
-            попадают в Google Sheets. Руководителю больше не нужно обзванивать всех по одному:
-            видно, кто что получил, сделал и отчитался, в одном удобном отчётном листе.
+          <p class="card-desc-preview">
+            Бот раздаёт задачи стажёрам и собирает отчёты сам.
           </p>
+          <p class="card-price">от 400–600&nbsp;$ за внедрение</p>
+          <p class="card-hint">
+            Нажми, чтобы увидеть, как исчезают созвоны «на отчёт»
+          </p>
+          <div class="card-body">
+            <p>
+              Менеджер заносит задачи по дням в таблицу — бот сам рассылает их стажёрам
+              и сотрудникам в Telegram.
+            </p>
+            <p>
+              В конце дня каждый отвечает боту коротким отчётом, и данные автоматически
+              попадают в Google Sheets. Руководителю больше не нужно обзванивать всех по одному:
+              видно, кто что получил, сделал и отчитался, в одном удобном отчётном листе.
+            </p>
+          </div>
         </article>
 
         <!-- 4. Корпоративный ассистент для руководителя -->
@@ -449,14 +508,26 @@
           <div class="card-image">
             <img src="corporate_assistant.png" alt="Корпоративный ассистент для руководителя" />
           </div>
+          <div class="card-tag">База знаний • Внутренние процессы</div>
           <div class="card-title">Корпоративный ассистент для руководителя</div>
-          <div class="card-hint">Нажми, чтобы узнать, как сотрудники перестают отвлекать шефа</div>
-          <p class="card-text">
-            Руководитель один раз загружает в ассистента свои регламенты, ответы на типовые
-            вопросы, шаблоны писем и инструкции. Дальше сотрудники обращаются не к нему, а к боту:
-            задают вопросы и тут же получают ответы из базы знаний. Новичкам проще адаптироваться,
-            текущая команда меньше отвлекает шефа, а знания компании не теряются при смене людей.
+          <p class="card-desc-preview">
+            База знаний, которая отвечает сотрудникам вместо шефа.
           </p>
+          <p class="card-price">от 500–800&nbsp;$ за внедрение</p>
+          <p class="card-hint">
+            Нажми, чтобы узнать, как сотрудники перестают отвлекать руководителя
+          </p>
+          <div class="card-body">
+            <p>
+              Руководитель один раз загружает в ассистента свои регламенты, ответы
+              на типовые вопросы, шаблоны писем и инструкции.
+            </p>
+            <p>
+              Дальше сотрудники обращаются не к нему, а к боту: задают вопросы и тут же
+              получают ответы из базы знаний. Новичкам проще адаптироваться, текущая команда
+              меньше отвлекает шефа, а знания компании не теряются при смене людей.
+            </p>
+          </div>
         </article>
 
         <!-- 5. Бот-секретарь -->
@@ -464,15 +535,26 @@
           <div class="card-image">
             <img src="voice_secretary_bot.png" alt="Бот-секретарь" />
           </div>
+          <div class="card-tag">Руководитель • Личные помощники</div>
           <div class="card-title">Бот-секретарь</div>
-          <div class="card-hint">Нажми, чтобы посмотреть, как он заменяет блокнот и память</div>
-          <p class="card-text">
-            Руководитель или менеджеры просто надиктовывают боту, с кем общались и о чём
-            договорились — по человеку или компании. Система переводит голос в текст и добавляет
-            запись в таблицу: контакт, статус, договорённости, дата следующего шага. По запросу бот
-            выдаёт историю общения с конкретным клиентом, а каждое утро присылает напоминания о
-            встречах и звонках на день.
+          <p class="card-desc-preview">
+            Голосовые заметки → структурированные записи в таблице.
           </p>
+          <p class="card-price">от 300–500&nbsp;$ за внедрение</p>
+          <p class="card-hint">
+            Нажми, чтобы посмотреть, как он заменяет блокнот и память
+          </p>
+          <div class="card-body">
+            <p>
+              Руководитель или менеджеры просто надиктовывают боту, с кем общались и о чём
+              договорились — по человеку или компании.
+            </p>
+            <p>
+              Система переводит голос в текст и добавляет запись в таблицу: контакт, статус,
+              договорённости, дата следующего шага. По запросу бот выдаёт историю общения
+              с конкретным клиентом, а каждое утро присылает напоминания о встречах и звонках.
+            </p>
+          </div>
         </article>
 
         <!-- 6. Бронирование доп. услуг в отеле -->
@@ -480,15 +562,27 @@
           <div class="card-image">
             <img src="hotel_services_booking.png" alt="Бронирование и продажа дополнительных услуг в отеле" />
           </div>
+          <div class="card-tag">Отели / Туризм</div>
           <div class="card-title">Бронирование и продажа доп. услуг в отеле</div>
-          <div class="card-hint">Нажми, чтобы понять, как бот помогает ресепшену</div>
-          <p class="card-text">
-            Гости через бота выбирают даты, тип номера и дополнительные услуги: трансфер,
-            экскурсии, SPA и другое. Бот, опираясь на базу знаний и таблицу с доступностью,
-            подбирает подходящие варианты, бронирует номер и услугу, а данные брони (ФИО, контакты,
-            время заезда/вылета, пожелания) записывает в Google Sheets. Персонал видит все заявки
-            в одном окне и не теряет ни одного запроса.
+          <p class="card-desc-preview">
+            Бот помогает ресепшену продавать номера и услуги без переписки.
           </p>
+          <p class="card-price">от 400–600&nbsp;$ за внедрение</p>
+          <p class="card-hint">
+            Нажми, чтобы понять, как бот помогает ресепшену
+          </p>
+          <div class="card-body">
+            <p>
+              Гости через бота выбирают даты, тип номера и дополнительные услуги: трансфер,
+              экскурсии, SPA и другое.
+            </p>
+            <p>
+              Бот, опираясь на базу знаний и таблицу с доступностью, подбирает варианты,
+              бронирует номер и услугу, а данные брони (ФИО, контакты, время заезда/вылета,
+              пожелания) записывает в Google Sheets. Персонал видит все заявки в одном окне
+              и не теряет ни одного запроса.
+            </p>
+          </div>
         </article>
       </div>
     </section>
