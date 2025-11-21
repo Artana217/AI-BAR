@@ -327,189 +327,97 @@
         </div>
       </div>
     </header>
+<section class="projects">
+  <div class="section-title">
+    <h2>Примеры автоматизаций на Make</h2>
+    <p>
+      Карточки открываются по клику: внутри — краткое описание того, как работает сценарий,
+      и ориентировочная стоимость внедрения. Точную цену мы считаем под ваши процессы.
+    </p>
+  </div>
 
-    <!-- PROJECTS SECTION -->
-    <section class="projects" id="projects">
-      <div class="section-title">
-        <h2>Примеры автоматизаций на Make</h2>
-        <p>
-          Карточки открываются по клику: внутри — краткое описание того, как
-          работает сценарий, и ориентировочная стоимость внедрения. Точную цену
-          мы считаем под ваши процессы.
+  <div class="cards-grid">
+
+    <!-- 1. Учет накладных -->
+    <article class="card" data-card>
+      <div class="card-image">
+        <img src="invoice_flow.png" alt="Учёт накладных и анализ цен" />
+      </div>
+
+      <div class="card-header">
+        <div>
+          <h3 class="card-title">Учёт накладных и анализ цен и затрат</h3>
+          <p class="card-desc-preview">
+            Фото накладной → таблица → отчёты по закупкам.
+          </p>
+        </div>
+        <div class="card-toggle-icon"><span>›</span></div>
+      </div>
+
+      <div class="card-body">
+        <p>Сотрудник фотографирует накладную и отправляет её в Telegram-бота. Сценарий распознаёт позиции, цены, суммы и автоматически заносит всё в Google Sheets.</p>
+        <p>Формируются отчёты: сколько закупили, как менялись цены, какие позиции дают основную долю расходов.</p>
+
+        <p class="card-price">
+          Примерная стоимость внедрения: <strong>от 350–500 $</strong>.
+          <span>Финальная цена зависит от объёма номенклатуры.</span>
         </p>
       </div>
+    </article>
 
-      <div class="cards-grid">
-        <!-- 1. Учёт накладных и анализ цен -->
-        <article class="card" data-card>
-          <div class="card-image">
-            <img
-              src="invoice_flow.png.png"
-              alt="Автоматизация учёта накладных и анализа цен"
-            />
-          </div>
-
-          <div class="card-header">
-            <div class="card-tag">Кафе • Учёт закупок</div>
-            <h3 class="card-title">
-              Учёт накладных и анализ цен от поставщиков
-            </h3>
-            <p class="card-desc-preview">
-              Фото накладной → таблица → отчёты по закупкам и ценам.
-            </p>
-            <div class="card-toggle-icon">
-              <span>&gt;</span>
-            </div>
-          </div>
-
-          <div class="card-body">
-            <p>
-              Сотрудник фотографирует накладную и отправляет её в Telegram-бота.
-              Сценарий в Make распознаёт позиции, суммы и поставщика и
-              автоматически заносит всё в Google&nbsp;Sheets — без ручного
-              набора.
-            </p>
-            <p>
-              Для руководителя формируются еженедельные и ежемесячные отчёты:
-              кто сколько купил, как меняются цены, какие позиции дают основную
-              долю затрат. Можно быстро заметить рост цен по отдельным
-              поставщикам.
-            </p>
-            <p class="card-price">
-              Примерная стоимость внедрения:
-              <span><strong>от 500&nbsp;€</strong></span>
-            </p>
-          </div>
-        </article>
-
-        <!-- 2. ИИ-ассистент для Instagram -->
-        <article class="card" data-card>
-          <div class="card-image">
-            <img
-              src="insta_gpt.png.png"
-              alt="ИИ-ассистент для Instagram"
-            />
-          </div>
-
-          <div class="card-header">
-            <div class="card-tag">Маркетинг • Соцсети</div>
-            <h3 class="card-title">ИИ-ассистент для Instagram</h3>
-            <p class="card-desc-preview">
-              Автопостинг, ответы на комментарии и сообщения из базы знаний.
-            </p>
-            <div class="card-toggle-icon">
-              <span>&gt;</span>
-            </div>
-          </div>
-
-          <div class="card-body">
-            <p>
-              Посты и сторис публикуются автоматически по расписанию. В
-              ассистента загружаем базу знаний: ваши услуги, УТП, часто
-              задаваемые вопросы, тон общения.
-            </p>
-            <p>
-              Бот отвечает на комментарии и сообщения в Direct, опираясь на эту
-              базу знаний и ваши правила общения. В сложных случаях аккуратно
-              передаёт диалог менеджеру.
-            </p>
-            <p>
-              Все обращения и вопросы складываются в таблицу — видно, что чаще
-              всего спрашивают, где возникают возражения и какие темы стоит
-              усилить в контенте.
-            </p>
-            <p class="card-price">
-              Примерная стоимость внедрения:
-              <span><strong>от 300&nbsp;€</strong></span>
-            </p>
-          </div>
-        </article>
-
-        <!-- 3. Автоматизация задач и отчётов для персонала -->
-        <article class="card" data-card>
-          <div class="card-image">
-            <img
-              src="task_automation.png.png"
-              alt="Автоматизация задач и отчётов для персонала"
-            />
-          </div>
-
-          <div class="card-header">
-            <div class="card-tag">Отдел продаж • Стажёры</div>
-            <h3 class="card-title">
-              Задачи и отчёты для стажёров в Telegram
-            </h3>
-            <p class="card-desc-preview">
-              Бот раздаёт задачи и собирает отчёты за каждого сотрудника.
-            </p>
-            <div class="card-toggle-icon">
-              <span>&gt;</span>
-            </div>
-          </div>
-
-          <div class="card-body">
-            <p>
-              Менеджер один раз заполняет задачи по дням в Google-таблице.
-              Сценарий в Make каждый день отправляет персоналу или стажёрам их
-              список задач в Telegram-бота.
-            </p>
-            <p>
-              В конце дня сотрудники отправляют отчёт прямо боту: что сделано,
-              какие вопросы возникли, какой результат. Бот складывает ответы в
-              таблицу — отдельно по каждому человеку и дню.
-            </p>
-            <p>
-              Руководитель видит картину в одном месте, не обзванивая всех по
-              очереди, и быстро замечает «просевших» сотрудников, которым нужна
-              помощь.
-            </p>
-            <p class="card-price">
-              Примерная стоимость внедрения:
-              <span><strong>от 400&nbsp;€</strong></span>
-            </p>
-          </div>
-        </article>
-
-        <!-- 4. Голосовой секретарь -->
-        <article class="card" data-card>
-          <div class="card-image">
-            <img
-              src="voice_secretary_bot.png"
-              alt="Голосовой секретарь для приёма заявок"
-            />
-          </div>
-
-          <div class="card-header">
-            <div class="card-tag">Сервис • Услуги</div>
-            <h3 class="card-title">Голосовой секретарь в Telegram</h3>
-            <p class="card-desc-preview">
-              Клиент говорит голосом — бот превращает это в заявку в таблице.
-            </p>
-            <div class="card-toggle-icon">
-              <span>&gt;</span>
-            </div>
-          </div>
-
-          <div class="card-body">
-            <p>
-              Клиент записывает голосовое сообщение боту: что нужно, на какую
-              дату, контакты. Сценарий распознаёт речь, структурирует данные и
-              заносит заявку в Google&nbsp;Sheets или CRM.
-            </p>
-            <p>
-              Менеджер видит все заявки в одном списке и не теряет заявки из
-              мессенджеров. При необходимости бот присылает напоминания о новых
-              обращениях.
-            </p>
-            <p class="card-price">
-              Примерная стоимость внедрения:
-              <span><strong>от 300&nbsp;€</strong></span>
-            </p>
-          </div>
-        </article>
+    <!-- 2. ИИ-ассистент для Instagram -->
+    <article class="card" data-card>
+      <div class="card-image">
+        <img src="insta_gpt.png" alt="ИИ-ассистент для Instagram" />
       </div>
-    </section>
 
-  </body>
-</html>
+      <div class="card-header">
+        <div>
+          <h3 class="card-title">ИИ-ассистент для Instagram</h3>
+          <p class="card-desc-preview">Автопостинг и ответы на комментарии.</p>
+        </div>
+        <div class="card-toggle-icon"><span>›</span></div>
+      </div>
 
+      <div class="card-body">
+        <p>Посты публикуются автоматически по расписанию. Мы загружаем в ассистента ваши услуги, скрипты и FAQ.</p>
+        <p>Бот отвечает на комментарии и Direct-сообщения, передавая сложные диалоги менеджеру.</p>
+
+        <p class="card-price">
+          Примерная стоимость внедрения: <strong>от 300 $</strong>.
+          <span>Цена зависит от объёма базы знаний.</span>
+        </p>
+      </div>
+    </article>
+
+    <!-- 3. Корпоративный ассистент -->
+    <article class="card" data-card>
+      <div class="card-image">
+        <img src="corporate_assistant.png" alt="Корпоративный ассистент для руководителя" />
+      </div>
+
+      <div class="card-header">
+        <div>
+          <h3 class="card-title">Корпоративный ассистент для руководителя</h3>
+          <p class="card-desc-preview">
+            База знаний компании, которая отвечает вместо сотрудников.
+          </p>
+        </div>
+        <div class="card-toggle-icon"><span>›</span></div>
+      </div>
+
+      <div class="card-body">
+        <p>Руководитель загружает инструкции, регламенты, типовые ответы. Бот отвечает сотрудникам вместо шефа.</p>
+        <p>Ассистент становится корпоративной базой знаний.</p>
+
+        <p class="card-price">
+          Примерная стоимость внедрения: <strong>от 400 $</strong>.
+          <span>Цена зависит от количества разделов и логики.</span>
+        </p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+   
