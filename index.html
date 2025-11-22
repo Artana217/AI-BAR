@@ -42,7 +42,7 @@
       padding: 24px 16px 56px;
     }
 
-    /* ===== HERO (шапка с баром) ===== */
+    /* ===== HERO ===== */
 
     .hero {
       position: relative;
@@ -52,28 +52,25 @@
       background: #000;
       box-shadow: 0 24px 70px rgba(0, 0, 0, 0.85);
       color: #fff;
-      min-height: 420px;
     }
 
     .hero-bg {
       position: absolute;
       inset: 0;
+      /* ОБРАТИ ВНИМАНИЕ: имя файла должно совпадать с картинкой в репо */
       background: url("ai-bar-header.png.png") center/cover no-repeat;
-      filter: saturate(1.1) brightness(0.95);
-      opacity: 0.95;
-      z-index: 0;
+      filter: saturate(1) brightness(0.9);
+      opacity: 0.85;
     }
 
     .hero-overlay {
       position: relative;
-      z-index: 1;
       padding: 28px 28px 32px;
       background: linear-gradient(
-        115deg,
-        rgba(0, 0, 0, 0.92) 0%,
-        rgba(0, 0, 0, 0.88) 40%,
-        rgba(0, 0, 0, 0.55) 70%,
-        rgba(0, 0, 0, 0.2) 100%
+        110deg,
+        rgba(0, 0, 0, 0.86) 0%,
+        rgba(0, 0, 0, 0.78) 45%,
+        rgba(0, 0, 0, 0.35) 100%
       );
     }
 
@@ -141,11 +138,10 @@
 
     .hero-main {
       max-width: 760px;
-      margin-top: 8px;
     }
 
     .hero-main h1 {
-      font-size: clamp(32px, 4.6vw, 46px);
+      font-size: clamp(32px, 4.6vw, 44px);
       line-height: 1.1;
       margin-bottom: 14px;
       font-weight: 700;
@@ -654,7 +650,7 @@
   </div>
 
   <script>
-    // Раскрытие/сворачивание описаний по клику или клавиатуре
+    // Раскрытие/сворачивание описаний по клику на карточку
     document.querySelectorAll(".card").forEach((card) => {
       const toggle = () => {
         card.classList.toggle("expanded");
