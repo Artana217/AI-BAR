@@ -149,6 +149,34 @@
       font-size: 10px;
     }
 
+    /* НОВЫЕ СТИЛИ ДЛЯ ЦВЕТНЫХ КНОПОК */
+
+    .btn-telegram {
+      background: #ff8fba;
+      color: #200010;
+      box-shadow: 0 0 18px rgba(255, 143, 186, 0.35);
+      border-color: transparent;
+    }
+
+    .btn-telegram:hover {
+      background: #ff7aa9;
+      box-shadow: 0 0 26px rgba(255, 143, 186, 0.5);
+      transform: translateY(-1px);
+    }
+
+    .btn-assistant {
+      background: #b7f3c6;
+      color: #032013;
+      box-shadow: 0 0 18px rgba(183, 243, 198, 0.35);
+      border-color: transparent;
+    }
+
+    .btn-assistant:hover {
+      background: #a2eeb6;
+      box-shadow: 0 0 26px rgba(183, 243, 198, 0.5);
+      transform: translateY(-1px);
+    }
+
     .hero-media {
       display: flex;
       flex-direction: column;
@@ -392,7 +420,7 @@
           </div>
           <div class="badge">
             <span class="badge-dot"></span>
-            Работаем с малым и средним бизнесом
+            Работаем с кафе, салонами, отелями и онлайн-проектами
           </div>
         </div>
 
@@ -400,7 +428,7 @@
           <a
             href="https://t.me/Bar_Suppor"
             target="_blank"
-            class="btn btn-primary"
+            class="btn btn-telegram"
           >
             <span class="btn-icon">TG</span>
             <span>Написать нам в Telegram</span>
@@ -415,16 +443,15 @@
             <span>Наш YouTube</span>
           </a>
 
-          <!-- ❗ НОВАЯ КНОПКА ДЛЯ АССИСТЕНТА -->
-          <a
-            href="https://your-backend-url-here"
-            target="_blank"
-            class="btn btn-outline"
+          <!-- Кнопка для AI-ассистента (подключишь к бэкенду по id или href) -->
+          <button
+            type="button"
+            class="btn btn-assistant"
+            id="assistantButton"
           >
             <span class="btn-icon">AI</span>
             <span>Консультация у AI-ассистента</span>
-          </a>
-          <!-- конец добавления -->
+          </button>
         </div>
       </div>
 
@@ -530,7 +557,7 @@
               на часто задаваемые вопросы, тон общения с аудиторией.
             </p>
             <p>
-              Бот сам отвечает на комментарии и сообщения в, опираясь
+              Бот сам отвечает на комментарии и сообщения в Direct, опираясь
               именно на эту базу знаний и ваши правила общения. При сложных
               вопросах он аккуратно передаёт диалог менеджеру.
             </p>
@@ -577,7 +604,7 @@
               персональный список задач в Telegram-бота.
             </p>
             <p>
-              В конце дня сотрудники наговаривают отчёт прямо в бота: что
+              В конце дня сотрудники отправляют отчёт прямо в бота: что
               сделано, какие есть вопросы и результаты. Бот складывает все
               ответы в таблицу — по каждому человеку и каждому дню.
             </p>
@@ -754,6 +781,11 @@
         card.classList.toggle("open");
       });
     });
+
+    // здесь можно повесить обработчик для ассистента
+    // document.getElementById("assistantButton").addEventListener("click", () => {
+    //   // запрос на бэкенд
+    // });
   </script>
 </body>
 </html>
