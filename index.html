@@ -759,49 +759,64 @@
         </article>
       </div>
     </section>
+</section>
 
-    <!-- FOOTER -->
-    <footer class="footer">
-      <span>© AI-BAR, 2025</span>
-      <span>Make • n8n • Telegram-боты • GPT-ассистенты</span>
-    </footer>
-  </div>
+<!-- FOOTER -->
+<footer class="footer">
+    <span>© AI-BAR, 2025</span>
+    <span>Make • n8n • Telegram-боты • GPT-ассистенты</span>
+</footer>
+
+</div>
+
 <script>
-// ------------------------------
-// Раскрытие карточек (оставляем как есть)
-// ------------------------------
-
+// --------------------------------------------------
+// Раскрытие карточек (оставляем как было)
+// --------------------------------------------------
 document.querySelectorAll("[data-card]").forEach((card) => {
-  card.addEventListener("click", () => {
-    card.classList.toggle("open");
-  });
+    card.addEventListener("click", () => {
+        card.classList.toggle("open");
+    });
 });
 
-// ------------------------------
+// --------------------------------------------------
 // Новый рабочий код запроса ассистенту
-// ------------------------------
-
+// --------------------------------------------------
 async function sendAssistantMessage(userMessage) {
-  try {
-    const response = await fetch(
-      "https://ai-bar-assistant.olga-krivosheeva100.workers.dev/",
-      {
-        method: "POST",
-        body: JSON.stringify({ message: userMessage })
-      }
-    );
+    try {
+        const response = await fetch(
+            "https://ai-bar-assistant.olga-krivosheeva100.workers.dev/",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ message: userMessage })
+            }
+        );
 
-    if (!response.ok) {
-      alert("Ошибка 💥: сервер вернул статус " + response.status);
-      return;
+        const data = await response.json();
+
+        // показываем ответ в диалоговом окне
+        alert("Ответ ассистента:\n\n" + data.reply);
+
+    } catch (error) {
+        alert("Ошибка при запросе к ассистенту:\n" + error.message);
     }
-
-    const data = await response.json();
-    alert("Ответ ассистента:\n\n" + data.reply);
-  } catch (err) {
-    alert("Ошибка запроса: " + err.message);
-  }
 }
+
+// --------------------------------------------------
+// Обработчик кнопки "Спросить ассистента"
+// --------------------------------------------------
+document.getElementById("askAssistantBtn")?.addEventListener("click", () => {
+    const userMessage = prompt("Напиши свой вопрос ассистенту:");
+    if (userMessage) {
+        sendAssistantMessage(userMessage);
+    }
+});
 </script>
 
+</body>
+</html>
 
+  
