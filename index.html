@@ -28,7 +28,7 @@
         Roboto, sans-serif;
       background: radial-gradient(circle at top, #202020 0, #000 55%);
       color: var(--text);
-      min-height: vh;
+      min-height: 100vh;
     }
 
     a {
@@ -130,7 +130,6 @@
 
     /* ЦВЕТНЫЕ КНОПКИ */
 
-    /* Telegram — грязно-розовый */
     .btn-telegram {
       background: #ff8fb8;
       color: #200010;
@@ -144,7 +143,6 @@
       transform: translateY(-1px);
     }
 
-    /* YouTube — бледно-золотой */
     .btn-youtube {
       background: #ffe8ac;
       color: #201000;
@@ -158,9 +156,8 @@
       transform: translateY(-1px);
     }
 
-    /* Ассистент — тёмно-зелёный */
     .btn-assistant {
-      background: #1b7f59; /* чуть темнее базового акцента */
+      background: #1b7f59;
       color: #f7f2e9;
       box-shadow: 0 0 18px rgba(27, 127, 89, 0.35);
       border-color: transparent;
@@ -207,8 +204,6 @@
       border-radius: 999px;
       border: 1px solid rgba(255, 196, 69, 0.3);
     }
-
-    /* SECTION TITLE */
 
     .section-title {
       margin: 10px 0 20px;
@@ -438,9 +433,11 @@
             <span>Наш YouTube</span>
           </a>
 
+          <!-- КНОПКА АССИСТЕНТА: больше НЕ ведёт на /assistant -->
           <a
-            href="/assistant"
+            href="#"
             class="btn btn-assistant"
+            id="assistantButton"
           >
             <span class="btn-icon">AI</span>
             <span>Консультация у AI-ассистента</span>
@@ -474,7 +471,7 @@
         <p>
           Карточки открываются по клику: внутри — краткое описание того, как
           работает сценарий, и ориентировочная стоимость внедрения. Точную
-          цену мы считаем под ваши процессы.
+          цену мы считаем под твои процессы.
         </p>
       </div>
 
@@ -536,7 +533,7 @@
             <div>
               <h3 class="card-title">ИИ-ассистент для Instagram</h3>
               <p class="card-desc-preview">
-                Автопостинг и ответы на комментарии из вашей базы знаний.
+                Автопостинг и ответы на комментарии из твоей базы знаний.
               </p>
             </div>
             <div class="card-toggle-icon">
@@ -546,12 +543,12 @@
           <div class="card-body">
             <p>
               Посты и сторис публикуются автоматически по расписанию. Мы
-              загружаем в ассистента базу знаний: ваши услуги, скрипты, ответы
+              загружаем в ассистента базу знаний: твои услуги, скрипты, ответы
               на часто задаваемые вопросы, тон общения с аудиторией.
             </p>
             <p>
               Бот сам отвечает на комментарии и сообщения в Direct, опираясь
-              именно на эту базу знаний и ваши правила общения. При сложных
+              именно на эту базу знаний и твои правила общения. При сложных
               вопросах он аккуратно передаёт диалог менеджеру.
             </p>
             <p>
@@ -722,7 +719,7 @@
                 Бронирование и продажа доп. услуг в отеле
               </h3>
               <p class="card-desc-preview">
-                Бот принимает заявки на номера, трансферы, экскурсии и собиает все данные.
+                Бот принимает заявки на номера, трансферы, экскурсии и собирает все данные.
               </p>
             </div>
             <div class="card-toggle-icon">
@@ -759,64 +756,74 @@
         </article>
       </div>
     </section>
-</section>
 
-<!-- FOOTER -->
-<footer class="footer">
-    <span>© AI-BAR, 2025</span>
-    <span>Make • n8n • Telegram-боты • GPT-ассистенты</span>
-</footer>
+    <!-- FOOTER -->
+    <footer class="footer">
+      <span>© AI-BAR, 2025</span>
+      <span>Make • n8n • Telegram-боты • GPT-ассистенты</span>
+    </footer>
+  </div>
 
-</div>
-
-<script>
-// --------------------------------------------------
-// Раскрытие карточек (оставляем как было)
-// --------------------------------------------------
-document.querySelectorAll("[data-card]").forEach((card) => {
-    card.addEventListener("click", () => {
+  <script>
+    // ------------------------------------
+    // Раскрытие/сворачивание карточек
+    // ------------------------------------
+    document.querySelectorAll("[data-card]").forEach((card) => {
+      card.addEventListener("click", () => {
         card.classList.toggle("open");
+      });
     });
-});
 
-// --------------------------------------------------
-// Новый рабочий код запроса ассистенту
-// --------------------------------------------------
-async function sendAssistantMessage(userMessage) {
-    try {
-        const response = await fetch(
-            "https://ai-bar-assistant.olga-krivosheeva100.workers.dev/",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ message: userMessage })
-            }
+    // ------------------------------------
+    // Кнопка "Консультация у AI-ассистента"
+    // ------------------------------------
+    const assistantButton = document.getElementById("assistantButton");
+
+    if (assistantButton) {
+      assistantButton.addEventListener("click", async (event) => {
+        event.preventDefault();
+
+        const userMessage = prompt(
+          "Напиши вопрос для AI-ассистента:"
         );
 
-        const data = await response.json();
+        if (!userMessage || !userMessage.trim()) {
+          return;
+        }
 
-        // показываем ответ в диалоговом окне
-        alert("Ответ ассистента:\n\n" + data.reply);
+        try {
+          const response = await fetch(
+            "https://ai-bar-assistant.olga-krivosheeva100.workers.dev/",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ message: userMessage.trim() }),
+            }
+          );
 
-    } catch (error) {
-        alert("Ошибка при запросе к ассистенту:\n" + error.message);
+          if (!response.ok) {
+            alert(
+              "Ассистент сейчас недоступен.\nКод ответа сервера: " +
+                response.status
+            );
+            return;
+          }
+
+          const data = await response.json();
+          const reply =
+            (data && (data.reply || data.answer)) ||
+            JSON.stringify(data, null, 2);
+
+          alert("Ответ ассистента:\n\n" + reply);
+        } catch (error) {
+          alert(
+            "Ошибка при обращении к ассистенту:\n" + (error.message || error)
+          );
+        }
+      });
     }
-}
-
-// --------------------------------------------------
-// Обработчик кнопки "Спросить ассистента"
-// --------------------------------------------------
-document.getElementById("askAssistantBtn")?.addEventListener("click", () => {
-    const userMessage = prompt("Напиши свой вопрос ассистенту:");
-    if (userMessage) {
-        sendAssistantMessage(userMessage);
-    }
-});
-</script>
-
+  </script>
 </body>
 </html>
-
-  
