@@ -128,8 +128,6 @@
         font-size: 10px;
       }
 
-      /* ЦВЕТНЫЕ КНОПКИ */
-
       .btn-telegram {
         background: #ff8fb8;
         color: #200010;
@@ -354,10 +352,6 @@
         display: block;
       }
 
-      .card-body p + p {
-        margin-top: 6px;
-      }
-
       .card-price {
         margin-top: 8px;
         font-size: 12px;
@@ -388,7 +382,7 @@
         opacity: 0.9;
       }
 
-      /* ---------- МОДАЛЬНОЕ ОКНО ДЛЯ АССИСТЕНТА ---------- */
+      /* ---------- МОДАЛКА С ЧАТОМ АССИСТЕНТА ---------- */
 
       #aiModal {
         position: fixed;
@@ -413,13 +407,16 @@
         box-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
         padding: 24px;
         border-radius: 16px;
-        max-width: 520px;
-        width: 90%;
+        max-width: 640px;
+        width: 95%;
         color: var(--text);
+        display: flex;
+        flex-direction: column;
+        max-height: 90vh;
       }
 
       .ai-modal-window h3 {
-        margin-bottom: 10px;
+        margin-bottom: 8px;
         font-size: 20px;
         color: var(--gold);
       }
@@ -430,10 +427,57 @@
         margin-bottom: 12px;
       }
 
+      .ai-chat {
+        flex: 1;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 196, 69, 0.25);
+        background: #050505;
+        padding: 10px;
+        overflow-y: auto;
+        font-size: 14px;
+        margin-bottom: 10px;
+      }
+
+      .ai-message {
+        margin-bottom: 8px;
+        line-height: 1.5;
+        white-space: pre-wrap;
+      }
+
+      .ai-message-user {
+        text-align: right;
+      }
+
+      .ai-message-user span {
+        display: inline-block;
+        background: #222;
+        border-radius: 12px;
+        padding: 6px 10px;
+      }
+
+      .ai-message-assistant span {
+        display: inline-block;
+        background: #161209;
+        border-radius: 12px;
+        padding: 6px 10px;
+        border: 1px solid rgba(255, 196, 69, 0.35);
+      }
+
+      .ai-message-label {
+        font-size: 12px;
+        color: var(--muted);
+        margin-bottom: 2px;
+      }
+
+      .ai-input-wrapper {
+        margin-top: 6px;
+      }
+
       #aiModalInput {
         width: 100%;
-        min-height: 90px;
-        padding: 10px;
+        min-height: 70px;
+        max-height: 140px;
+        padding: 8px;
         background: #000;
         color: var(--text);
         border: 1px solid rgba(255, 196, 69, 0.25);
@@ -443,28 +487,13 @@
       }
 
       .ai-modal-status {
-        margin-top: 10px;
+        margin-top: 6px;
         font-size: 13px;
         color: var(--muted);
       }
 
-      .ai-modal-answer {
-        margin-top: 14px;
-        padding-top: 10px;
-        border-top: 1px solid rgba(255, 196, 69, 0.25);
-        font-size: 14px;
-        line-height: 1.6;
-        white-space: pre-wrap;
-      }
-
-      .ai-modal-answer-title {
-        font-weight: 600;
-        margin-bottom: 4px;
-        color: var(--gold-soft);
-      }
-
       .ai-modal-actions {
-        margin-top: 16px;
+        margin-top: 10px;
         display: flex;
         justify-content: flex-end;
         gap: 12px;
@@ -539,7 +568,6 @@
               <span>Наш YouTube</span>
             </a>
 
-            <!-- КНОПКА АССИСТЕНТА -->
             <a href="#" class="btn btn-assistant" id="assistantButton">
               <span class="btn-icon">AI</span>
               <span>Консультация у AI-ассистента</span>
@@ -572,7 +600,7 @@
         </div>
       </header>
 
-      <!-- PROJECTS SECTION -->
+      <!-- PROJECTS SECTION (оставляю как было у тебя) -->
       <section>
         <div class="section-title">
           <h2>Примеры автоматизаций на Make</h2>
@@ -584,7 +612,7 @@
         </div>
 
         <div class="cards-grid">
-          <!-- 1. Учёт накладных и анализ цен и затрат -->
+          <!-- 1. Учёт накладных -->
           <article class="card" data-card>
             <div class="card-image">
               <img
@@ -607,24 +635,12 @@
             </div>
             <div class="card-body">
               <p>
-                Сотрудник просто фотографирует накладную и отправляет её в
-                Telegram-бота. Сценарий в Make распознаёт позиции, цены, суммы и
-                поставщика и автоматически заносит всё в Google Sheets — без
-                ручного набора.
-              </p>
-              <p>
-                Для руководителя формируются еженедельные и ежемесячные отчёты:
-                сколько и у кого закупили, как меняются цены, какие позиции дают
-                основную долю затрат. После правок в таблице бот собирает
-                аккуратный Google-документ «отчёт по закупкам» для печати или
-                отправки бухгалтеру.
+                Сотрудник фотографирует накладную и отправляет её в
+                Telegram-бота. Сценарий в Make распознаёт позиции, цены, суммы
+                и поставщика и автоматически заносит всё в Google Sheets.
               </p>
               <p class="card-price">
-                Примерная стоимость внедрения: <strong>от 500&nbsp;€</strong>.
-                <span>
-                  Точную цену рассчитаем после обсуждения объёма номенклатуры и
-                  текущих процессов.
-                </span>
+                Примерная стоимость: <strong>от 500&nbsp;€</strong>.
               </p>
             </div>
           </article>
@@ -650,31 +666,16 @@
             </div>
             <div class="card-body">
               <p>
-                Посты и сторис публикуются автоматически по расписанию. Мы
-                загружаем в ассистента базу знаний: твои услуги, скрипты, ответы
-                на часто задаваемые вопросы, тон общения с аудиторией.
-              </p>
-              <p>
-                Бот сам отвечает на комментарии и сообщения в Direct, опираясь
-                именно на эту базу знаний и твои правила общения. При сложных
-                вопросах он аккуратно передаёт диалог менеджеру.
-              </p>
-              <p>
-                Все отзывы и вопросы собираются в таблицу: ассистент на основе
-                этих данных показывает, что чаще всего хвалят, а где есть
-                повторяющиеся возражения и точки роста.
+                Посты и сторис публикуются по расписанию, бот отвечает на
+                комментарии и вопросы в Direct, опираясь на твою базу знаний.
               </p>
               <p class="card-price">
-                Примерная стоимость внедрения: <strong>от 300&nbsp;€</strong>.
-                <span>
-                  Финальная стоимость зависит от объёма базы знаний и количества
-                  аккаунтов.
-                </span>
+                Примерная стоимость: <strong>от 300&nbsp;€</strong>.
               </p>
             </div>
           </article>
 
-          <!-- 3. Автоматизация задач и отчётов для персонала -->
+          <!-- 3. Автоматизация задач и отчётов -->
           <article class="card" data-card>
             <div class="card-image">
               <img
@@ -688,7 +689,7 @@
                   Автоматизация задач и отчётов для персонала
                 </h3>
                 <p class="card-desc-preview">
-                  Бот раздаёт задачи стажёрам и собирает отчёты сам.
+                  Бот раздаёт задачи и сам собирает отчёты.
                 </p>
               </div>
               <div class="card-toggle-icon">
@@ -697,35 +698,21 @@
             </div>
             <div class="card-body">
               <p>
-                Менеджер один раз заводит задания по дням в Google-таблицу.
-                Сценарий в Make каждый день отправляет персоналу или стажёрам их
-                персональный список задач в Telegram-бота.
-              </p>
-              <p>
-                В конце дня сотрудники отправляют отчёт прямо в бота: что
-                сделано, какие есть вопросы и результаты. Бот складывает все
-                ответы в таблицу — по каждому человеку и каждому дню.
-              </p>
-              <p>
-                Руководителю больше не нужно обзванивать всех по очереди: вся
-                картина видна в одном месте, можно быстро заметить «просевшие»
-                дни и сотрудников, которым нужна помощь.
+                Менеджер один раз заводит задания в таблицу, бот каждый день
+                рассылает их стажёрам и собирает отчёты обратно.
               </p>
               <p class="card-price">
-                Примерная стоимость внедрения: <strong>от 400&nbsp;€</strong>.
-                <span>
-                  Итоговая цена зависит от количества ролей и веток сценария.
-                </span>
+                Примерная стоимость: <strong>от 400&nbsp;€</strong>.
               </p>
             </div>
           </article>
 
-          <!-- 4. Корпоративный ассистент для руководителя -->
+          <!-- 4. Корпоративный ассистент -->
           <article class="card" data-card>
             <div class="card-image">
               <img
                 src="corporate_assistant.png"
-                alt="Корпоративный ассистент для руководителя"
+                alt="Корпоративный ассистент"
               />
             </div>
             <div class="card-header">
@@ -734,8 +721,7 @@
                   Корпоративный ассистент для руководителя
                 </h3>
                 <p class="card-desc-preview">
-                  База знаний компании, которая отвечает сотрудникам вместо
-                  шефа.
+                  База знаний компании, которая отвечает сотрудникам.
                 </p>
               </div>
               <div class="card-toggle-icon">
@@ -744,27 +730,11 @@
             </div>
             <div class="card-body">
               <p>
-                Руководитель один раз загружает свои регламенты, инструкции,
-                ответы на типовые вопросы и бизнес-логику в ассистента — по
-                сути, создаёт корпоративную базу знаний.
-              </p>
-              <p>
-                Сотрудники задают вопросы ассистенту в чате: «как оформить
-                возврат», «какой тариф предложить этому клиенту», «что делать,
-                если …». GPT-ассистент отвечает сразу, опираясь на эту базу
-                знаний, и не отвлекает шефа по мелочам.
-              </p>
-              <p>
-                В сложных или нестандартных случаях ассистент честно
-                признаётся, что нужен человек, и предлагает передать вопрос
-                руководителю или ответственному менеджеру.
+                Ассистент знает регламенты и процедуры и отвечает сотрудникам
+                вместо шефа.
               </p>
               <p class="card-price">
-                Примерная стоимость внедрения: <strong>от 300&nbsp;€</strong>.
-                <span>
-                  Стоимость зависит от объёма документов и требований к точности
-                  ответов.
-                </span>
+                Примерная стоимость: <strong>от 300&nbsp;€</strong>.
               </p>
             </div>
           </article>
@@ -774,14 +744,14 @@
             <div class="card-image">
               <img
                 src="voice_secretary_bot.png"
-                alt="Бот-секретарь для ведения контактов и договорённостей"
+                alt="Бот-секретарь"
               />
             </div>
             <div class="card-header">
               <div>
                 <h3 class="card-title">Бот-секретарь</h3>
                 <p class="card-desc-preview">
-                  Голосом зафиксировали договорённости — бот всё запомнил.
+                  Голосом зафиксировали договорённости — бот всё помнит.
                 </p>
               </div>
               <div class="card-toggle-icon">
@@ -790,37 +760,21 @@
             </div>
             <div class="card-body">
               <p>
-                Руководитель или менеджеры просто надиктовывают боту: с кем
-                общались, о чём договорились, когда нужно связаться ещё раз.
-                Сценарий распознаёт речь и структурирует данные в таблице.
-              </p>
-              <p>
-                В таблице фиксируются: человек или компания, контакты, дата
-                общения, краткое содержание договорённостей, следующий шаг.
-                Ничего не теряется в заметках и мессенджерах.
-              </p>
-              <p>
-                По запросу «покажи всё по компании N» бот выдаёт сводку по этому
-                человеку или фирме. Каждое утро он напоминает о сегодняшних
-                встречах и звонках, чтобы важные контакты не выпадали из поля
-                зрения.
+                Ты надиктовываешь боту с кем и о чём договорился, он
+                аккуратно раскладывает всё по таблице.
               </p>
               <p class="card-price">
-                Примерная стоимость внедрения: <strong>от 500&nbsp;€</strong>.
-                <span>
-                  Итоговая цена зависит от числа пользователей и глубины
-                  отчётности.
-                </span>
+                Примерная стоимость: <strong>от 500&nbsp;€</strong>.
               </p>
             </div>
           </article>
 
-          <!-- 6. Бронирование и продажа доп. услуг в отеле -->
+          <!-- 6. Отель -->
           <article class="card" data-card>
             <div class="card-image">
               <img
                 src="hotel_services_booking.png"
-                alt="Бронирование номеров и дополнительных услуг в отеле"
+                alt="Бронирование и доп. услуги"
               />
             </div>
             <div class="card-header">
@@ -829,8 +783,7 @@
                   Бронирование и продажа доп. услуг в отеле
                 </h3>
                 <p class="card-desc-preview">
-                  Бот принимает заявки на номера, трансферы, экскурсии и
-                  собирает все данные.
+                  Заявки на номера, трансферы, экскурсии — всё в одном месте.
                 </p>
               </div>
               <div class="card-toggle-icon">
@@ -839,63 +792,45 @@
             </div>
             <div class="card-body">
               <p>
-                Гости общаются с отелем через удобного Telegram-бота: запрашивают
-                свободные номера, бронируют трансфер, экскурсии, спа и другие
-                услуги. Все заявки сразу попадают в таблицу, где персонал видит
-                их в режиме реального времени.
-              </p>
-              <p>
-                Бот подбирает подходящий номер, исходя из базы знаний: типы
-                комнат, цены, заполняемость, ограничения по размещению. При
-                необходимости он задаёт уточняющие вопросы и предлагает несколько
-                вариантов.
-              </p>
-              <p>
-                Одновременно бот собирает всю нужную информацию о госте:
-                ФИО, даты заезда и выезда, количество человек, контакты,
-                пожелания по размещению и доп. услугам. Менеджеру остаётся только
-                подтвердить бронь и принять оплату.
+                Гость общается с отелем через Telegram-бота, а данные сразу
+                летят в таблицу для менеджеров.
               </p>
               <p class="card-price">
-                Примерная стоимость внедрения:
-                <strong> от 800&nbsp;€</strong>. <span>
-                  Финальная сумма зависит от количества услуг, языков и глубины
-                  интеграции с PMS.
-                </span>
+                Примерная стоимость: <strong>от 800&nbsp;€</strong>.
               </p>
             </div>
           </article>
         </div>
       </section>
 
-      <!-- FOOTER -->
       <footer class="footer">
         <span>© AI-BAR, 2025</span>
         <span>Make • n8n • Telegram-боты • GPT-ассистенты</span>
       </footer>
     </div>
 
-    <!-- МОДАЛЬНОЕ ОКНО ДЛЯ ВОПРОСА/ОТВЕТА АССИСТЕНТА -->
+    <!-- МОДАЛКА С ЧАТОМ АССИСТЕНТА -->
     <div id="aiModal">
       <div class="ai-modal-backdrop"></div>
       <div class="ai-modal-window">
         <h3>Вопрос для AI-ассистента</h3>
         <p class="ai-modal-desc">
-          Ассистенту обычно требуется несколько секунд на ответ.
-          Напиши свой вопрос ниже:
+          Ассистенту обычно требуется несколько секунд на ответ. Можно задать
+          несколько вопросов подряд — он будет опираться на предыдущий диалог.
         </p>
 
-        <textarea
-          id="aiModalInput"
-          placeholder="Например: как автоматизировать обработку накладных в кафе?"
-        ></textarea>
+        <div id="aiChat" class="ai-chat">
+          <!-- сюда будут добавляться сообщения -->
+        </div>
+
+        <div class="ai-input-wrapper">
+          <textarea
+            id="aiModalInput"
+            placeholder="Например: можешь помочь собрать техзадание для бота по обработке накладных?"
+          ></textarea>
+        </div>
 
         <div id="aiModalStatus" class="ai-modal-status"></div>
-
-        <div id="aiModalAnswer" class="ai-modal-answer" style="display:none;">
-          <div class="ai-modal-answer-title">Ответ ассистента:</div>
-          <div id="aiModalAnswerText"></div>
-        </div>
 
         <div class="ai-modal-actions">
           <button id="aiModalCancel">Закрыть</button>
@@ -904,123 +839,145 @@
       </div>
     </div>
 
-   <script>
-  // Раскрытие карточек
-  document.querySelectorAll("[data-card]").forEach((card) => {
-    card.addEventListener("click", () => {
-      card.classList.toggle("open");
-    });
-  });
+    <script>
+      // ---------- раскрытие карточек ----------
+      document.querySelectorAll("[data-card]").forEach((card) => {
+        card.addEventListener("click", () => {
+          card.classList.toggle("open");
+        });
+      });
 
-  // Текущий ID диалога с ассистентом (одна "сессия" на вкладку)
-  let currentThreadId = null;
-
-  const assistantButton = document.getElementById("assistantButton");
-
-  if (assistantButton) {
-    assistantButton.addEventListener("click", (event) => {
-      event.preventDefault();
+      // ---------- логика ассистента ----------
+      const assistantButton = document.getElementById("assistantButton");
+      let currentThreadId = null; // одна сессия на вкладку
 
       const modal = document.getElementById("aiModal");
+      const chatBox = document.getElementById("aiChat");
       const input = document.getElementById("aiModalInput");
-      const status = document.getElementById("aiModalStatus");
-      const answerBlock = document.getElementById("aiModalAnswer");
-      const answerText = document.getElementById("aiModalAnswerText");
+      const statusLine = document.getElementById("aiModalStatus");
       const btnCancel = document.getElementById("aiModalCancel");
       const btnOk = document.getElementById("aiModalOk");
 
-      const openModal = () => {
+      function openModal() {
         modal.style.display = "flex";
-        status.textContent = "";
-        status.style.color = "var(--muted)";
-        answerBlock.style.display = "none";
-        answerText.textContent = "";
-        btnOk.disabled = false;
-        btnCancel.disabled = false;
-        // оставляем предыдущий текст вопроса, если хочешь — можно очищать:
-        // input.value = "";
+        statusLine.textContent = "";
+        statusLine.style.color = "var(--muted)";
+        if (!chatBox.innerHTML.trim()) {
+          // при первом открытии можно добавить приветствие-подсказку
+          addAssistantMessage(
+            "Привет! 👋 Я ассистент AI-BAR и могу помочь с идеями автоматизации, техническими заданиями и вопросами по ботам. Напиши, что хочешь упростить в своём бизнесе."
+          );
+        }
         input.focus();
-      };
+      }
 
-      const closeModal = () => {
+      function closeModal() {
         modal.style.display = "none";
-      };
-
-      if (!btnCancel.dataset.bound) {
-        btnCancel.dataset.bound = "true";
-        btnCancel.addEventListener("click", () => {
-          closeModal();
-        });
       }
 
-      if (!btnOk.dataset.bound) {
-        btnOk.dataset.bound = "true";
-        btnOk.addEventListener("click", async () => {
-          const userMessage = input.value.trim();
-          if (!userMessage) return;
+      function addMessage(role, text) {
+        const wrapper = document.createElement("div");
+        wrapper.classList.add("ai-message");
+        if (role === "user") wrapper.classList.add("ai-message-user");
+        if (role === "assistant") wrapper.classList.add("ai-message-assistant");
 
-          status.textContent = "Ассистент обрабатывает вопрос…";
-          status.style.color = "var(--muted)";
-          answerBlock.style.display = "none";
-          answerText.textContent = "";
-          btnOk.disabled = true;
-          btnCancel.disabled = true;
+        const label = document.createElement("div");
+        label.classList.add("ai-message-label");
+        label.textContent = role === "user" ? "Ты:" : "Ассистент:";
 
-          try {
-            const response = await fetch(
-              "https://ai-bar-assistant.olga-krivosheeva100.workers.dev/",
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  message: userMessage,
-                  threadId: currentThreadId, // передаём текущий диалог (если есть)
-                }),
-              }
-            );
+        const bubble = document.createElement("span");
+        bubble.textContent = text;
 
-            if (!response.ok) {
-              status.textContent =
-                "Ассистент сейчас недоступен. Код ответа сервера: " +
-                response.status;
-              status.style.color = "var(--danger)";
-              btnOk.disabled = false;
-              btnCancel.disabled = false;
-              return;
+        wrapper.appendChild(label);
+        wrapper.appendChild(bubble);
+        chatBox.appendChild(wrapper);
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }
+
+      function addUserMessage(text) {
+        addMessage("user", text);
+      }
+
+      function addAssistantMessage(text) {
+        addMessage("assistant", text);
+      }
+
+      async function sendQuestion() {
+        const userMessage = input.value.trim();
+        if (!userMessage) return;
+
+        addUserMessage(userMessage);
+        input.value = "";
+        statusLine.textContent = "Ассистент обрабатывает вопрос…";
+        statusLine.style.color = "var(--muted)";
+        btnOk.disabled = true;
+        btnCancel.disabled = true;
+
+        try {
+          const response = await fetch(
+            "https://ai-bar-assistant.olga-krivosheeva100.workers.dev/",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                message: userMessage,
+                threadId: currentThreadId, // если воркер поддерживает threadId — будет диалог
+              }),
             }
+          );
 
-            const data = await response.json();
-
-            // сохраняем/обновляем threadId, чтобы продолжать диалог
-            if (data.threadId) {
-              currentThreadId = data.threadId;
-            }
-
-            const reply =
-              (data && (data.reply || data.answer)) ||
-              JSON.stringify(data, null, 2);
-
-            status.textContent = "";
-            status.style.color = "var(--muted)";
-            answerText.textContent = reply;
-            answerBlock.style.display = "block";
-          } catch (error) {
-            status.textContent =
-              "Ошибка при обращении к ассистенту: " +
-              (error.message || error);
-            status.style.color = "var(--danger)";
-          } finally {
-            btnOk.disabled = false;
-            btnCancel.disabled = false;
+          if (!response.ok) {
+            statusLine.textContent =
+              "Ассистент сейчас недоступен. Код ответа: " + response.status;
+            statusLine.style.color = "var(--danger)";
+            return;
           }
+
+          const data = await response.json();
+          if (data.threadId) {
+            currentThreadId = data.threadId;
+          }
+
+          const reply =
+            (data && (data.reply || data.answer)) ||
+            JSON.stringify(data, null, 2);
+
+          addAssistantMessage(reply);
+          statusLine.textContent = "";
+          statusLine.style.color = "var(--muted)";
+        } catch (error) {
+          statusLine.textContent =
+            "Ошибка при обращении к ассистенту: " +
+            (error.message || String(error));
+          statusLine.style.color = "var(--danger)";
+        } finally {
+          btnOk.disabled = false;
+          btnCancel.disabled = false;
+        }
+      }
+
+      if (assistantButton) {
+        assistantButton.addEventListener("click", (e) => {
+          e.preventDefault();
+          openModal();
         });
       }
 
-      openModal();
-    });
-  }
-</script>
+      btnCancel.addEventListener("click", () => {
+        closeModal();
+      });
+
+      btnOk.addEventListener("click", () => {
+        sendQuestion();
+      });
+
+      // отправка по Ctrl+Enter
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
+          e.preventDefault();
+          sendQuestion();
+        }
+      });
+    </script>
   </body>
 </html>
