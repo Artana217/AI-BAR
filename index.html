@@ -1,1024 +1,982 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <title>AI-BAR — автоматизации для бизнеса без кода</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <style>
-      :root {
-        --bg: #050505;
-        --gold: #ffc445;
-        --gold-soft: #f2b94a;
-        --text: #f7f2e9;
-        --card-bg: #101010;
-        --card-hover: #181818;
-        --muted: #b6a88a;
-        --accent: #23a473;
-        --danger: #ff6b6b;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <title>AI-BAR — автоматизации для бизнеса без кода</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #050505;
+      --bg-elevated: #101010;
+      --bg-elevated-2: #181818;
+      --border-soft: rgba(255, 255, 255, 0.06);
+      --gold: #ffc445;
+      --gold-soft: #f2b94a;
+      --accent: #23a473;
+      --text: #f7f2e9;
+      --muted: #b6a88a;
+      --danger: #ff6b6b;
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --shadow-soft: 0 24px 60px rgba(0, 0, 0, 0.75);
+      --transition-fast: 0.18s ease-out;
+    }
 
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
+    * {
+      box-sizing: border-box;
+    }
 
-      body {
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-          Roboto, sans-serif;
-        background: radial-gradient(circle at top, #202020 0, #000 55%);
-        color: var(--text);
-        min-height: 100vh;
-      }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #171717 0, #050505 55%);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
 
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-      .page {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 32px 16px 64px;
-      }
+    img {
+      max-width: 100%;
+      display: block;
+    }
 
-      /* HEADER */
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 16px 72px;
+    }
 
+    /* HERO */
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+      gap: 32px;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    @media (max-width: 900px) {
       .hero {
-        display: grid;
-        grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
-        gap: 32px;
-        align-items: center;
-        margin-bottom: 40px;
+        grid-template-columns: minmax(0, 1fr);
       }
+    }
 
-      .hero-text h1 {
-        font-size: clamp(28px, 4vw, 40px);
-        line-height: 1.2;
-        margin-bottom: 12px;
-      }
+    .hero-text h1 {
+      font-size: clamp(28px, 4vw, 36px);
+      line-height: 1.2;
+      margin: 0 0 16px;
+    }
 
-      .hero-text h1 span {
-        color: var(--gold);
-      }
+    .hero-text h1 span {
+      color: var(--gold);
+    }
 
-      .hero-subtitle {
-        font-size: 16px;
-        color: var(--muted);
-        max-width: 520px;
-        line-height: 1.5;
-        margin-bottom: 20px;
-      }
+    .hero-subtitle {
+      margin: 0 0 20px;
+      color: var(--muted);
+      max-width: 560px;
+      font-size: 15px;
+    }
 
-      .hero-badges {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-bottom: 24px;
-      }
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
 
-      .badge {
-        border-radius: 999px;
-        border: 1px solid rgba(255, 196, 69, 0.35);
-        padding: 6px 12px;
-        font-size: 12px;
-        color: var(--muted);
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-      }
+    .badge {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-size: 12px;
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      backdrop-filter: blur(12px);
+      background: radial-gradient(circle at top left,
+          rgba(255, 196, 69, 0.14),
+          rgba(0, 0, 0, 0.8));
+    }
 
-      .badge-dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 999px;
-        background: var(--gold);
-      }
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 10px rgba(255, 196, 69, 0.7);
+    }
 
-      .hero-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-      }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
 
-      .btn {
-        border-radius: 999px;
-        padding: 10px 18px;
-        font-size: 14px;
-        font-weight: 500;
-        border: 1px solid transparent;
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        transition: background 0.2s ease, transform 0.1s ease,
-          box-shadow 0.2s ease, border-color 0.2s ease;
-        background: transparent;
-        color: var(--text);
-      }
+    .btn {
+      border-radius: 999px;
+      padding: 10px 20px;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform var(--transition-fast),
+        box-shadow var(--transition-fast),
+        background var(--transition-fast),
+        color var(--transition-fast),
+        border-color var(--transition-fast);
+      white-space: nowrap;
+    }
 
-      .btn-icon {
-        width: 18px;
-        height: 18px;
-        border-radius: 999px;
-        border: 1px solid currentColor;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 10px;
-      }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #1c7d57);
+      color: #fff;
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    }
 
-      .btn-telegram {
-        background: #ff8fb8;
-        color: #200010;
-        box-shadow: 0 0 18px rgba(255, 143, 184, 0.35);
-        border-color: transparent;
-      }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 40px rgba(26, 148, 104, 0.55);
+    }
 
-      .btn-telegram:hover {
-        background: #ff7aa9;
-        box-shadow: 0 0 26px rgba(255, 143, 184, 0.5);
-        transform: translateY(-1px);
-      }
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: var(--text);
+    }
 
-      .btn-youtube {
-        background: #ffe8ac;
-        color: #201000;
-        box-shadow: 0 0 18px rgba(255, 232, 172, 0.25);
-        border-color: transparent;
-      }
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.35);
+    }
 
-      .btn-youtube:hover {
-        background: #ffe299;
-        box-shadow: 0 0 24px rgba(255, 232, 172, 0.4);
-        transform: translateY(-1px);
-      }
+    .btn-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.7);
+      font-size: 12px;
+    }
 
-      .btn-assistant {
-        background: #1b7f59;
-        color: #f7f2e9;
-        box-shadow: 0 0 18px rgba(27, 127, 89, 0.35);
-        border-color: transparent;
-      }
+    .hero-note {
+      font-size: 13px;
+      color: var(--muted);
+    }
 
-      .btn-assistant:hover {
-        background: #156346;
-        box-shadow: 0 0 24px rgba(27, 127, 89, 0.5);
-        transform: translateY(-1px);
-      }
+    /* HERO IMAGE CARD */
 
-      .hero-media {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-      }
+    .hero-media {
+      border-radius: var(--radius-xl);
+      background: radial-gradient(circle at top left,
+          rgba(255, 196, 69, 0.16),
+          rgba(0, 0, 0, 0.95));
+      padding: 14px;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
 
+    .hero-media-inner {
+      border-radius: calc(var(--radius-xl) - 6px);
+      overflow: hidden;
+      background: #000;
+      position: relative;
+    }
 
-      .hero-flags {
-        margin-top: 18px;
-        display: flex;
-        justify-content: center;
-        gap: 18px;
-      }
+    .hero-media-footer {
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.84);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 12px;
+      display: inline-flex;
+      flex-direction: column;
+      gap: 2px;
+    }
 
-      .flag-link {
-        font-size: 32px;
-        text-decoration: none;
-        filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.8));
-        opacity: 0.85;
-        transition: transform 0.15s ease, opacity 0.15s ease;
-      }
+    .hero-media-footer-title {
+      font-size: 13px;
+      color: var(--gold-soft);
+      font-weight: 600;
+    }
 
-      .flag-link:hover {
-        transform: translateY(-2px) scale(1.05);
-        opacity: 1;
-      }
+    .hero-media-footer-sub {
+      color: var(--muted);
+    }
 
-      .flag-link.active {
-        filter: drop-shadow(0 0 14px rgba(255, 196, 69, 0.8));
-        opacity: 1;
-      }
+    .hero-logo-circle {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: radial-gradient(circle at top left,
+          rgba(255, 196, 69, 0.3),
+          rgba(0, 0, 0, 0.95));
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.9);
+    }
 
+    .hero-logo-circle img {
+      width: 60%;
+      height: 60%;
+      object-fit: contain;
+    }
 
-      .hero-header-img {
-        width: 100%;
-        max-width: 420px;
-        border-radius: 24px;
-        overflow: hidden;
-        border: 1px solid rgba(255, 196, 69, 0.35);
-        box-shadow: 0 0 26px rgba(0, 0, 0, 0.75);
-      }
+    /* LANGUAGE FLAGS */
 
-      .hero-header-img img {
-        width: 100%;
-        display: block;
-      }
+    .hero-flags {
+      margin-top: 18px;
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      justify-content: center;
+    }
 
-      .hero-logo {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        color: var(--muted);
-        font-size: 13px;
-      }
+    .flag-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: var(--muted);
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      background: rgba(0, 0, 0, 0.6);
+      cursor: pointer;
+      transition: background var(--transition-fast),
+        border-color var(--transition-fast),
+        transform var(--transition-fast),
+        color var(--transition-fast),
+        box-shadow var(--transition-fast);
+    }
 
-      .hero-logo img {
-        width: 44px;
-        height: 44px;
-        border-radius: 999px;
-        border: 1px solid rgba(255, 196, 69, 0.3);
-      }
+    .flag-link img {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 14px rgba(0, 0, 0, 0.9);
+    }
 
-      .section-title {
-        margin: 10px 0 20px;
-      }
+    .flag-link span {
+      font-weight: 500;
+    }
 
-      .section-title h2 {
-        font-size: 20px;
-        margin-bottom: 6px;
-      }
+    .flag-link.active {
+      border-color: rgba(255, 196, 69, 0.9);
+      color: #fff;
+      box-shadow: 0 0 24px rgba(255, 196, 69, 0.4);
+      background: radial-gradient(circle at top,
+          rgba(255, 196, 69, 0.22),
+          rgba(0, 0, 0, 0.92));
+      transform: translateY(-1px);
+    }
 
-      .section-title p {
-        font-size: 14px;
-        color: var(--muted);
-        max-width: 640px;
-      }
+    .flag-link:hover:not(.active) {
+      border-color: rgba(255, 255, 255, 0.25);
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+    }
 
-      /* CARDS */
+    /* SECTIONS */
 
+    .section-title {
+      margin: 40px 0 6px;
+      font-size: 22px;
+    }
+
+    .section-subtitle {
+      margin: 0 0 20px;
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 720px;
+    }
+
+    /* CARDS */
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    @media (max-width: 800px) {
       .cards-grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 20px;
+        grid-template-columns: minmax(0, 1fr);
       }
+    }
 
-      @media (max-width: 900px) {
-        .hero {
-          grid-template-columns: minmax(0, 1fr);
-        }
-        .hero-media {
-          order: -1;
-        }
-        .cards-grid {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-      }
+    .card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top left,
+          rgba(255, 196, 69, 0.12),
+          rgba(0, 0, 0, 0.96));
+      padding: 14px;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform var(--transition-fast),
+        box-shadow var(--transition-fast),
+        border-color var(--transition-fast),
+        background var(--transition-fast);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
 
-      @media (max-width: 650px) {
-        .cards-grid {
-          grid-template-columns: minmax(0, 1fr);
-        }
-      }
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 196, 69, 0.4);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9);
+      background: radial-gradient(circle at top left,
+          rgba(255, 196, 69, 0.22),
+          rgba(0, 0, 0, 0.98));
+    }
 
-      .card {
-        background: linear-gradient(145deg, #090909, #050505);
-        border-radius: 18px;
-        border: 1px solid rgba(255, 196, 69, 0.18);
-        padding: 14px 14px 16px;
-        cursor: pointer;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        position: relative;
-        overflow: hidden;
-        transition: background 0.2s ease, transform 0.1s ease,
-          box-shadow 0.2s ease, border-color 0.2s ease;
-      }
+    .card-image {
+      border-radius: 14px;
+      overflow: hidden;
+      max-height: 190px;
+    }
 
-      .card::before {
-        content: "";
-        position: absolute;
-        inset: -40%;
-        opacity: 0;
-        background: radial-gradient(
-          circle at top,
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .card-tagline {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .card-body {
+      font-size: 13px;
+      color: var(--text);
+      margin-top: 4px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.22s ease-out;
+    }
+
+    .card.open .card-body {
+      max-height: 220px;
+    }
+
+    .card-footer {
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--gold-soft);
+      font-weight: 500;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-toggle {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* FOOTER */
+
+    .site-footer {
+      margin-top: 40px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: space-between;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* AI MODAL */
+
+    .ai-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.72);
+      backdrop-filter: blur(18px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.18s ease-out;
+      z-index: 60;
+    }
+
+    .ai-modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .ai-modal {
+      width: min(640px, 100% - 32px);
+      max-height: min(520px, 100% - 32px);
+      background: radial-gradient(circle at top,
           rgba(255, 196, 69, 0.18),
-          transparent 55%
-        );
-        transition: opacity 0.2s ease;
-        pointer-events: none;
-      }
+          rgba(5, 5, 5, 0.98));
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: var(--shadow-soft);
+      padding: 20px 22px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+    }
 
-      .card:hover {
-        background: var(--card-hover);
-        transform: translateY(-1px);
-        box-shadow: 0 0 24px rgba(0, 0, 0, 0.8);
-        border-color: rgba(255, 196, 69, 0.4);
-      }
+    .ai-modal h2 {
+      margin: 0;
+      font-size: 20px;
+    }
 
-      .card:hover::before {
-        opacity: 1;
-      }
+    .ai-modal-subtitle {
+      margin: 0;
+      font-size: 13px;
+      color: var(--muted);
+    }
 
-      .card-image {
-        border-radius: 14px;
-        overflow: hidden;
-        border: 1px solid rgba(255, 196, 69, 0.3);
-        background: radial-gradient(circle at top, #1a1a1a, #000);
-        max-height: 180px;
-      }
+    .ai-dialog {
+      margin-top: 8px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(0, 0, 0, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      max-height: 180px;
+      overflow-y: auto;
+      font-size: 13px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
 
-      .card-image img {
-        width: 100%;
-        display: block;
-        object-fit: cover;
-      }
+    .ai-msg {
+      padding: 8px 10px;
+      border-radius: 12px;
+      max-width: 92%;
+    }
 
-      .card-header {
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        gap: 8px;
-      }
+    .ai-msg-user {
+      align-self: flex-end;
+      background: rgba(35, 164, 115, 0.22);
+      border: 1px solid rgba(35, 164, 115, 0.8);
+    }
 
-      .card-title {
-        font-size: 15px;
-        font-weight: 600;
-      }
+    .ai-msg-assistant {
+      align-self: flex-start;
+      background: rgba(0, 0, 0, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
 
-      .card-desc-preview {
-        margin-top: 2px;
-        font-size: 12px;
-        color: var(--muted);
-      }
+    .ai-label {
+      font-size: 13px;
+      color: var(--muted);
+    }
 
-      .card-toggle-icon {
-        width: 20px;
-        height: 20px;
-        border-radius: 999px;
-        border: 1px solid rgba(255, 196, 69, 0.6);
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 12px;
-        flex-shrink: 0;
-        margin-top: 1px;
-        background: rgba(0, 0, 0, 0.6);
-      }
+    .ai-input {
+      width: 100%;
+      resize: vertical;
+      min-height: 70px;
+      max-height: 140px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(0, 0, 0, 0.85);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+    }
 
-      .card-toggle-icon span {
-        transition: transform 0.15s ease;
-      }
+    .ai-input:focus {
+      border-color: rgba(35, 164, 115, 0.9);
+      box-shadow: 0 0 0 1px rgba(35, 164, 115, 0.7);
+    }
 
-      .card.open .card-toggle-icon span {
-        transform: rotate(90deg);
-      }
+    .ai-status {
+      font-size: 12px;
+      color: var(--muted);
+      min-height: 16px;
+    }
 
-      .card-body {
-        font-size: 13px;
-        line-height: 1.55;
-        color: var(--muted);
-        margin-top: 6px;
-        border-top: 1px dashed rgba(255, 196, 69, 0.24);
-        padding-top: 8px;
-        display: none;
-      }
+    .ai-modal-actions {
+      margin-top: 6px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
 
-      .card.open .card-body {
-        display: block;
-      }
+    .btn-secondary {
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+      transition: background var(--transition-fast),
+        border-color var(--transition-fast),
+        transform var(--transition-fast);
+    }
 
-      .card-price {
-        margin-top: 8px;
-        font-size: 12px;
-        color: var(--gold-soft);
-        font-weight: 500;
-      }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.35);
+      transform: translateY(-1px);
+    }
 
-      .card-price span {
-        color: var(--muted);
-        font-weight: 400;
-      }
+    .btn-primary-modal {
+      border-radius: 999px;
+      padding: 8px 18px;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--accent), #1c7d57);
+      color: #fff;
+      transition: transform var(--transition-fast),
+        box-shadow var(--transition-fast),
+        opacity var(--transition-fast);
+    }
 
-      /* FOOTER */
+    .btn-primary-modal:hover:enabled {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 36px rgba(26, 148, 104, 0.65);
+    }
 
-      .footer {
-        border-top: 1px solid rgba(255, 196, 69, 0.18);
-        margin-top: 36px;
-        padding-top: 12px;
-        font-size: 12px;
-        color: var(--muted);
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        justify-content: space-between;
-      }
+    .btn-primary-modal:disabled {
+      opacity: 0.6;
+      cursor: default;
+      box-shadow: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- HERO -->
+    <header class="hero">
+      <div class="hero-text">
+        <h1>
+          <span>AI-BAR</span> — автоматизации для бизнеса без кода
+        </h1>
 
-      .footer span {
-        opacity: 0.9;
-      }
-
-      /* ---------- МОДАЛКА С ЧАТОМ АССИСТЕНТА ---------- */
-
-      #aiModal {
-        position: fixed;
-        inset: 0;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        z-index: 9999;
-      }
-
-      .ai-modal-backdrop {
-        position: absolute;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.65);
-        backdrop-filter: blur(2px);
-      }
-
-      .ai-modal-window {
-        position: relative;
-        background: #111;
-        border: 1px solid rgba(255, 196, 69, 0.3);
-        box-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
-        padding: 24px;
-        border-radius: 16px;
-        max-width: 640px;
-        width: 95%;
-        color: var(--text);
-        display: flex;
-        flex-direction: column;
-        max-height: 90vh;
-      }
-
-      .ai-modal-window h3 {
-        margin-bottom: 8px;
-        font-size: 20px;
-        color: var(--gold);
-      }
-
-      .ai-modal-desc {
-        font-size: 14px;
-        color: var(--muted);
-        margin-bottom: 12px;
-      }
-
-      .ai-chat {
-        flex: 1;
-        border-radius: 10px;
-        border: 1px solid rgba(255, 196, 69, 0.25);
-        background: #050505;
-        padding: 10px;
-        overflow-y: auto;
-        font-size: 14px;
-        margin-bottom: 10px;
-      }
-
-      .ai-message {
-        margin-bottom: 8px;
-        line-height: 1.5;
-        white-space: pre-wrap;
-      }
-
-      .ai-message-user {
-        text-align: right;
-      }
-
-      .ai-message-user span {
-        display: inline-block;
-        background: #222;
-        border-radius: 12px;
-        padding: 6px 10px;
-      }
-
-      .ai-message-assistant span {
-        display: inline-block;
-        background: #161209;
-        border-radius: 12px;
-        padding: 6px 10px;
-        border: 1px solid rgba(255, 196, 69, 0.35);
-      }
-
-      .ai-message-label {
-        font-size: 12px;
-        color: var(--muted);
-        margin-bottom: 2px;
-      }
-
-      .ai-input-wrapper {
-        margin-top: 6px;
-      }
-
-      #aiModalInput {
-        width: 100%;
-        min-height: 70px;
-        max-height: 140px;
-        padding: 8px;
-        background: #000;
-        color: var(--text);
-        border: 1px solid rgba(255, 196, 69, 0.25);
-        border-radius: 10px;
-        resize: vertical;
-        font-size: 14px;
-      }
-
-      .ai-modal-status {
-        margin-top: 6px;
-        font-size: 13px;
-        color: var(--muted);
-      }
-
-      .ai-modal-actions {
-        margin-top: 10px;
-        display: flex;
-        justify-content: flex-end;
-        gap: 12px;
-      }
-
-      .ai-modal-actions button {
-        padding: 8px 18px;
-        border-radius: 999px;
-        cursor: pointer;
-        border: none;
-        font-size: 14px;
-      }
-
-      #aiModalCancel {
-        background: #333;
-        color: var(--muted);
-      }
-
-      #aiModalOk {
-        background: var(--accent);
-        color: #fff;
-      }
-
-      .ai-modal-actions button:disabled {
-        opacity: 0.6;
-        cursor: default;
-      }
-    </style>
-  </head>
-
-  <body>
-    <div class="page">
-      <!-- HERO -->
-      <header class="hero">
-        <div class="hero-text">
-          <h1>
-            <span>AI-BAR</span> — автоматизации для бизнеса без кода
-          </h1>
-          <p class="hero-subtitle">
-            Настраиваем чат-ботов и сценарии в Make и n8n, которые экономят
-            время, снимают рутину с команды и дают руководителю понятные
-            отчёты по цифрам.
-          </p>
-
-          <div class="hero-badges">
-            <div class="badge">
-              <span class="badge-dot"></span>
-              Telegram-боты, GPT-ассистенты, Google Sheets
-            </div>
-            <div class="badge">
-              <span class="badge-dot"></span>
-              Работаем со средним и малым бизнесом
-            </div>
-          </div>
-
-          <div class="hero-actions">
-            <a
-              href="https://t.me/Bar_Suppor"
-              target="_blank"
-              class="btn btn-telegram"
-            >
-              <span class="btn-icon">TG</span>
-              <span>Написать нам в Telegram</span>
-            </a>
-
-            <a
-              href="https://www.youtube.com/@Ai-Bar-content"
-              target="_blank"
-              class="btn btn-youtube"
-            >
-              <span class="btn-icon">YT</span>
-              <span>Наш YouTube</span>
-            </a>
-
-            <a href="#" class="btn btn-assistant" id="assistantButton">
-              <span class="btn-icon">AI</span>
-              <span>Консультация у AI-ассистента</span>
-            </a>
-          </div>
-        </div>
-
-        <div class="hero-media">
-          <div class="hero-header-img">
-            <img
-              src="ai-bar-header.png.png"
-              alt="AI-BAR — автоматизация бизнес-процессов"
-            />
-          </div>
-          <div class="hero-logo">
-            <img src="ai-bar-logo.png.jpg" alt="Логотип AI-BAR" />
-            <div>
-              <div
-                style="
-                  font-size: 13px;
-                  color: var(--gold-soft);
-                  font-weight: 600;
-                "
-              >
-                AI-BAR — no-code автоматизации
-              </div>
-              <div>Make • n8n • Telegram-боты • GPT-ассистенты</div>
-            </div>
-          </div>
-       <div class="hero-flags">
-  <a href="index-uk.html" class="flag-link">🇺🇦 UA</a>
-  <a href="index.html" class="flag-link active">🇷🇺 RU</a>
-  <a href="index-en.html" class="flag-link">🇬🇧 ENG</a>
-</div>
-  </div>
-      </header>
-
-      <!-- PROJECTS SECTION (оставляю как было у тебя) -->
-      <section>
-        <div class="section-title">
-          <h2>Примеры автоматизаций на Make</h2>
-          <p>
-            Карточки открываются по клику: внутри — краткое описание того, как
-            работает сценарий, и ориентировочная стоимость внедрения. Точную
-            цену мы считаем исходя из ваших процессов.
-          </p>
-        </div>
-
-        <div class="cards-grid">
-          <!-- 1. Учёт накладных -->
-          <article class="card" data-card>
-            <div class="card-image">
-              <img
-                src="invoice_flow.png.png"
-                alt="Автоматизация учёта накладных и анализа цен"
-              />
-            </div>
-            <div class="card-header">
-              <div>
-                <h3 class="card-title">
-                  Учёт накладных и анализ цен и затрат
-                </h3>
-                <p class="card-desc-preview">
-                  Фото накладной → таблица → отчёты по закупкам и ценам.
-                </p>
-              </div>
-              <div class="card-toggle-icon">
-                <span>&gt;</span>
-              </div>
-            </div>
-            <div class="card-body">
-              <p>
-                Сотрудник фотографирует накладную и отправляет её в
-                Telegram-бота. Сценарий в Make распознаёт позиции, цены, суммы
-                и поставщика и автоматически заносит всё в Google Sheets.
-              </p>
-              <p class="card-price">
-                Примерная стоимость: <strong>от 500&nbsp;€</strong>.
-              </p>
-            </div>
-          </article>
-
-          <!-- 2. ИИ-ассистент для Instagram -->
-          <article class="card" data-card>
-            <div class="card-image">
-              <img
-                src="insta_gpt.png.png"
-                alt="ИИ-ассистент для Instagram"
-              />
-            </div>
-            <div class="card-header">
-              <div>
-                <h3 class="card-title">ИИ-ассистент для Instagram</h3>
-                <p class="card-desc-preview">
-                  Автопостинг и ответы на комментарии из твоей базы знаний.
-                </p>
-              </div>
-              <div class="card-toggle-icon">
-                <span>&gt;</span>
-              </div>
-            </div>
-            <div class="card-body">
-              <p>
-                Посты и сторис публикуются по расписанию, бот отвечает на
-                комментарии и вопросы в Direct, опираясь на твою базу знаний.
-                Можно подключить GPT-ассистента, который будет писать ответы
-                «по-умному», а не шаблонами.
-              </p>
-              <p class="card-price">
-                Примерная стоимость: <strong>от 300&nbsp;€</strong>.
-              </p>
-            </div>
-          </article>
-
-          <!-- 3. Автоматизация задач и отчётов -->
-          <article class="card" data-card>
-            <div class="card-image">
-              <img
-                src="task_automation.png.png"
-                alt="Автоматизация задач и отчётов для персонала"
-              />
-            </div>
-            <div class="card-header">
-              <div>
-                <h3 class="card-title">
-                  Автоматизация задач и отчётов для персонала
-                </h3>
-                <p class="card-desc-preview">
-                  Бот раздаёт задачи и сам собирает отчёты.
-                </p>
-              </div>
-              <div class="card-toggle-icon">
-                <span>&gt;</span>
-              </div>
-            </div>
-            <div class="card-body">
-              <p>
-                Менеджер один раз заводит задания в таблицу, бот каждый день
-                рассылает их стажёрам и собирает отчёты обратно. В конце дня
-                руководитель видит, что сделано, а что застряло.
-              </p>
-              <p class="card-price">
-                Примерная стоимость: <strong>от 400&nbsp;€</strong>.
-              </p>
-            </div>
-          </article>
-
-          <!-- 4. Корпоративный ассистент -->
-          <article class="card" data-card>
-            <div class="card-image">
-              <img
-                src="corporate_assistant.png"
-                alt="Корпоративный ассистент"
-              />
-            </div>
-            <div class="card-header">
-              <div>
-                <h3 class="card-title">
-                  Корпоративный ассистент для руководителя
-                </h3>
-                <p class="card-desc-preview">
-                  База знаний компании, которая отвечает сотрудникам.
-                </p>
-              </div>
-              <div class="card-toggle-icon">
-                <span>&gt;</span>
-              </div>
-            </div>
-            <div class="card-body">
-              <p>
-                Ассистент знает регламенты и процедуры и отвечает сотрудникам
-                вместо шефа: где взять тот или иной документ, как оформлять
-                заявки, кому что согласовывать. Можно подключить Telegram-бота,
-                чтобы им было удобно обращаться к базе знаний.
-              </p>
-              <p class="card-price">
-                Примерная стоимость: <strong>от 300&nbsp;€</strong>.
-              </p>
-            </div>
-          </article>
-
-          <!-- 5. Бот-секретарь -->
-          <article class="card" data-card>
-            <div class="card-image">
-              <img
-                src="voice_secretary_bot.png"
-                alt="Бот-секретарь"
-              />
-            </div>
-            <div class="card-header">
-              <div>
-                <h3 class="card-title">Бот-секретарь</h3>
-                <p class="card-desc-preview">
-                  Голосом зафиксировали договорённости — бот всё помнит.
-                </p>
-              </div>
-              <div class="card-toggle-icon">
-                <span>&gt;</span>
-              </div>
-            </div>
-            <div class="card-body">
-              <p>
-                Ты надиктовываешь боту с кем и о чём договорился, он
-                аккуратно раскладывает всё по таблице: имя клиента, тема
-                разговора, договорённости, дедлайны. В любой момент можно
-                поднять историю по человеку.
-              </p>
-              <p class="card-price">
-                Примерная стоимость: <strong>от 500&nbsp;€</strong>.
-              </p>
-            </div>
-          </article>
-
-          <!-- 6. Отель -->
-          <article class="card" data-card>
-            <div class="card-image">
-              <img
-                src="hotel_services_booking.png"
-                alt="Бронирование и доп. услуги"
-              />
-            </div>
-            <div class="card-header">
-              <div>
-                <h3 class="card-title">
-                  Бронирование и продажа доп. услуг в отеле
-                </h3>
-                <p class="card-desc-preview">
-                  Заявки на номера, трансферы, экскурсии — всё в одном месте.
-                </p>
-              </div>
-              <div class="card-toggle-icon">
-                <span>&gt;</span>
-              </div>
-            </div>
-            <div class="card-body">
-              <p>
-                Гость общается с отелем через Telegram-бота: бронирует номер,
-                заказывает трансфер, выбирает экскурсии. Все заявки собираются
-                в таблице для менеджеров, можно подключить уведомления в
-                отдельный чат.
-              </p>
-              <p class="card-price">
-                Примерная стоимость: <strong>от 800&nbsp;€</strong>.
-              </p>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <footer class="footer">
-        <span>© AI-BAR, 2025</span>
-        <span>Make • n8n • Telegram-боты • GPT-ассистенты</span>
-      </footer>
-    </div>
-
-    <!-- МОДАЛКА С ЧАТОМ АССИСТЕНТА -->
-    <div id="aiModal">
-      <div class="ai-modal-backdrop"></div>
-      <div class="ai-modal-window">
-        <h3>Вопрос для AI-ассистента</h3>
-        <p class="ai-modal-desc">
-          Ассистенту обычно требуется несколько секунд на ответ. Можно задать
-          несколько вопросов подряд — он будет опираться на предыдущий диалог.
+        <p class="hero-subtitle">
+          Настраиваем чат-ботов и сценарии в Make и n8n, которые экономят время, снимают
+          рутину с команды и дают руководителю понятные отчёты по цифрам.
         </p>
 
-        <div id="aiChat" class="ai-chat">
-          <!-- сюда будут добавляться сообщения -->
+        <div class="hero-badges">
+          <div class="badge">
+            <span class="badge-dot"></span>
+            Telegram-боты, GPT-ассистенты, Google Sheets
+          </div>
+          <div class="badge">
+            Работаем со средним и малым бизнесом
+          </div>
         </div>
 
-        <div class="ai-input-wrapper">
-          <textarea
-            id="aiModalInput"
-            placeholder="Например: можешь помочь собрать техзадание для бота по обработке накладных?"
-          ></textarea>
+        <div class="hero-actions">
+          <a href="https://t.me" target="_blank" rel="noopener" class="btn btn-ghost">
+            <span class="btn-icon">TG</span>
+            <span>Написать нам в Telegram</span>
+          </a>
+
+          <a href="https://www.youtube.com" target="_blank" rel="noopener" class="btn btn-ghost">
+            <span class="btn-icon">YT</span>
+            <span>Наш YouTube</span>
+          </a>
+
+          <button id="assistantButton" class="btn btn-primary">
+            <span class="btn-icon">AI</span>
+            <span>Консультация у AI-ассистента</span>
+          </button>
         </div>
 
-        <div id="aiModalStatus" class="ai-modal-status"></div>
+        <div class="hero-note">
+          Можно задать несколько вопросов подряд — ассистент будет помнить контекст диалога.
+        </div>
 
-        <div class="ai-modal-actions">
-          <button id="aiModalCancel">Закрыть</button>
-          <button id="aiModalOk">Отправить</button>
+        <div class="hero-flags">
+          <a href="index-uk.html" class="flag-link">
+            <img src="flag-ua.png" alt="Українська" />
+            <span>UA</span>
+          </a>
+          <a href="index.html" class="flag-link active">
+            <img src="flag-ru.jpg" alt="Русский" />
+            <span>RU</span>
+          </a>
+          <a href="index-en.html" class="flag-link">
+            <img src="flag-en.jpg" alt="English" />
+            <span>ENG</span>
+          </a>
         </div>
       </div>
+
+      <div class="hero-media">
+        <div class="hero-media-inner">
+          <img
+            src="ai-bar-header.png"
+            alt="AI-BAR — автоматизация бизнес-процессов"
+          />
+          <div class="hero-logo-circle">
+            <img src="ai-bar-logo.png" alt="AI-BAR" />
+          </div>
+          <div class="hero-media-footer">
+            <div class="hero-media-footer-title">AI-BAR — no-code автоматизации</div>
+            <div class="hero-media-footer-sub">
+              Make • n8n • Telegram-боты • GPT-ассистенты
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- PROJECTS SECTION -->
+    <section>
+      <h2 class="section-title">Примеры автоматизаций на Make</h2>
+      <p class="section-subtitle">
+        Карточки открываются по клику: внутри — краткое описание того, как работает сценарий, и ориентировочная стоимость внедрения.
+        Точную цену считаем исходя из процессов в вашей компании.
+      </p>
+
+      <div class="cards-grid">
+        <!-- Card 1 -->
+        <article class="card" data-card>
+          <div class="card-image">
+            <img src="invoice_flow.png" alt="Учёт накладных и анализ цен" />
+          </div>
+          <div class="card-title">Учёт накладных и анализ цен и затрат</div>
+          <div class="card-tagline">
+            Фото накладной → таблица → отчёты по закупкам и ценам.
+          </div>
+          <div class="card-body">
+            Сотрудник фотографирует накладную и отправляет её в Telegram-бота. Сценарий в Make распознаёт позиции, цены,
+            суммы и поставщика и автоматически заносит всё в Google Sheets. Руководитель видит динамику закупок и может
+            сравнивать цены по поставщикам без ручного ввода.
+          </div>
+          <div class="card-footer">
+            <span>Примерная стоимость: от 500&nbsp;€</span>
+            <span class="card-toggle">Нажми, чтобы раскрыть</span>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="card" data-card>
+          <div class="card-image">
+            <img src="insta_gpt.png" alt="ИИ-ассистент для Instagram" />
+          </div>
+          <div class="card-title">ИИ-ассистент для Instagram</div>
+          <div class="card-tagline">
+            Автопостинг и ответы на комментарии из твоей базы знаний.
+          </div>
+          <div class="card-body">
+            Посты и сторис публикуются по расписанию, бот отвечает на комментарии и вопросы в Direct, опираясь на
+            вашу базу знаний. Можно подключить GPT-ассистента, который пишет ответы не шаблонами, а «по-умному» —
+            в стиле бренда.
+          </div>
+          <div class="card-footer">
+            <span>Примерная стоимость: от 300&nbsp;€</span>
+            <span class="card-toggle">Нажми, чтобы раскрыть</span>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="card" data-card>
+          <div class="card-image">
+            <img src="tasks_flow.png" alt="Автоматизация задач и отчётов" />
+          </div>
+          <div class="card-title">Автоматизация задач и отчётов для персонала</div>
+          <div class="card-tagline">
+            Бот раздаёт задачи и сам собирает отчёты.
+          </div>
+          <div class="card-body">
+            Менеджер один раз заводит задания в таблицу, бот каждый день рассылает их стажёрам и собирает отчёты
+            обратно. В конце дня руководитель видит, что сделано, а что застряло, без бесконечных созвонов и переписок.
+          </div>
+          <div class="card-footer">
+            <span>Примерная стоимость: от 400&nbsp;€</span>
+            <span class="card-toggle">Нажми, чтобы раскрыть</span>
+          </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="card" data-card>
+          <div class="card-image">
+            <img src="ai-bar-assistant.png" alt="Корпоративный ассистент" />
+          </div>
+          <div class="card-title">Корпоративный ассистент для руководителя</div>
+          <div class="card-tagline">
+            База знаний компании, которая отвечает сотрудникам.
+          </div>
+          <div class="card-body">
+            Ассистент знает регламенты и процедуры и отвечает сотрудникам вместо шефа: где взять тот или иной документ,
+            как оформлять заявки, кому что согласовывать. Можно подключить Telegram-бота, чтобы им было удобно обращаться
+            к базе знаний с телефона.
+          </div>
+          <div class="card-footer">
+            <span>Примерная стоимость: от 300&nbsp;€</span>
+            <span class="card-toggle">Нажми, чтобы раскрыть</span>
+          </div>
+        </article>
+
+        <!-- Card 5 -->
+        <article class="card" data-card>
+          <div class="card-image">
+            <img src="voice_secretary.png" alt="Бот-секретарь" />
+          </div>
+          <div class="card-title">Бот-секретарь</div>
+          <div class="card-tagline">
+            Голосом зафиксировали договорённости — бот всё помнит.
+          </div>
+          <div class="card-body">
+            Ты надиктовываешь боту, с кем и о чём договорился, он аккуратно раскладывает всё по таблице:
+            имя клиента, тема разговора, договорённости, дедлайны. В любой момент можно поднять историю по человеку
+            и не потерять важные детали.
+          </div>
+          <div class="card-footer">
+            <span>Примерная стоимость: от 500&nbsp;€</span>
+            <span class="card-toggle">Нажми, чтобы раскрыть</span>
+          </div>
+        </article>
+
+        <!-- Card 6 -->
+        <article class="card" data-card>
+          <div class="card-image">
+            <img src="hotel_flow.png" alt="Бронирование и продажа доп. услуг" />
+          </div>
+          <div class="card-title">Бронирование и продажа доп. услуг в отеле</div>
+          <div class="card-tagline">
+            Заявки на номера, трансферы, экскурсии — всё в одном месте.
+          </div>
+          <div class="card-body">
+            Гость общается с отелем через Telegram-бота: бронирует номер, заказывает трансфер, выбирает экскурсии.
+            Все заявки собираются в таблице для менеджеров, можно подключить уведомления в отдельный чат, чтобы
+            сотрудники не пропускали запросы.
+          </div>
+          <div class="card-footer">
+            <span>Примерная стоимость: от 800&nbsp;€</span>
+            <span class="card-toggle">Нажми, чтобы раскрыть</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div>© AI-BAR, 2025</div>
+      <div>Make • n8n • Telegram-боты • GPT-ассистенты</div>
+    </footer>
+  </div>
+
+  <!-- AI MODAL -->
+  <div class="ai-modal-overlay" id="aiModalOverlay">
+    <div class="ai-modal" id="aiModal">
+      <h2>Вопрос для AI-ассистента</h2>
+      <p class="ai-modal-subtitle">
+        Ассистенту обычно требуется несколько секунд на ответ. Можно задать несколько вопросов подряд — он будет
+        опираться на предыдущий диалог.
+      </p>
+
+      <div class="ai-dialog" id="aiDialog"></div>
+
+      <label for="aiQuestion" class="ai-label">
+        Напиши свой вопрос ниже:
+      </label>
+      <textarea id="aiQuestion" class="ai-input" placeholder="Например: можешь помочь собрать ТЗ для моего проекта?"></textarea>
+
+      <div class="ai-status" id="aiStatus"></div>
+
+      <div class="ai-modal-actions">
+        <button id="aiModalClose" class="btn-secondary">Закрыть</button>
+        <button id="aiModalOk" class="btn-primary-modal">Отправить</button>
+      </div>
     </div>
+  </div>
 
-    <script>
-      // ---------- раскрытие карточек ----------
-      document.querySelectorAll("[data-card]").forEach((card) => {
-        card.addEventListener("click", () => {
-          card.classList.toggle("open");
-        });
+  <script>
+    // --- раскрытие карточек ---
+    document.querySelectorAll("[data-card]").forEach((card) => {
+      card.addEventListener("click", () => {
+        card.classList.toggle("open");
       });
+    });
 
-      // ---------- логика ассистента ----------
-      const assistantButton = document.getElementById("assistantButton");
-      let currentThreadId = null; // одна сессия на вкладку
+    // --- модальное окно ассистента ---
+    const assistantButton = document.getElementById("assistantButton");
+    const modalOverlay = document.getElementById("aiModalOverlay");
+    const modal = document.getElementById("aiModal");
+    const input = document.getElementById("aiQuestion");
+    const dialog = document.getElementById("aiDialog");
+    const statusLine = document.getElementById("aiStatus");
+    const btnOk = document.getElementById("aiModalOk");
+    const btnClose = document.getElementById("aiModalClose");
 
-      const modal = document.getElementById("aiModal");
-      const chatBox = document.getElementById("aiChat");
-      const input = document.getElementById("aiModalInput");
-      const statusLine = document.getElementById("aiModalStatus");
-      const btnCancel = document.getElementById("aiModalCancel");
-      const btnOk = document.getElementById("aiModalOk");
+    let currentThreadId = null;
 
-      function openModal() {
-        modal.style.display = "flex";
-        statusLine.textContent = "";
+    function openModal() {
+      if (!modalOverlay) return;
+      modalOverlay.classList.add("open");
+      if (statusLine) {
+        statusLine.textContent = "Ассистенту обычно требуется несколько секунд на ответ.";
         statusLine.style.color = "var(--muted)";
-        if (!chatBox.innerHTML.trim()) {
-          // при первом открытии можно добавить приветствие-подсказку
-          addAssistantMessage(
-            "Привет! 👋 Я ассистент AI-BAR и могу помочь с идеями автоматизации, техническими заданиями и вопросами по ботам. Напиши, что хочешь упростить в своём бизнесе."
-          );
-        }
-        input.focus();
       }
-
-      function closeModal() {
-        modal.style.display = "none";
-      }
-
-      function addMessage(role, text) {
-        const wrapper = document.createElement("div");
-        wrapper.classList.add("ai-message");
-        if (role === "user") wrapper.classList.add("ai-message-user");
-        if (role === "assistant") wrapper.classList.add("ai-message-assistant");
-
-        const label = document.createElement("div");
-        label.classList.add("ai-message-label");
-        label.textContent = role === "user" ? "Ты:" : "Ассистент:";
-
-        const bubble = document.createElement("span");
-        bubble.textContent = text;
-
-        wrapper.appendChild(label);
-        wrapper.appendChild(bubble);
-        chatBox.appendChild(wrapper);
-        chatBox.scrollTop = chatBox.scrollHeight;
-      }
-
-      function addUserMessage(text) {
-        addMessage("user", text);
-      }
-
-      function addAssistantMessage(text) {
-        addMessage("assistant", text);
-      }
-
-      async function sendQuestion() {
-        const userMessage = input.value.trim();
-        if (!userMessage) return;
-
-        addUserMessage(userMessage);
+      if (input) {
         input.value = "";
-        statusLine.textContent = "Ассистент обрабатывает вопрос…";
-        statusLine.style.color = "var(--muted)";
-        btnOk.disabled = true;
-        btnCancel.disabled = true;
-
-        try {
-          const response = await fetch(
-            "https://ai-bar-assistant.olga-krivosheeva100.workers.dev/",
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                message: userMessage,
-                threadId: currentThreadId, // если воркер поддерживает threadId — будет диалог
-              }),
-            }
-          );
-
-          if (!response.ok) {
-            statusLine.textContent =
-              "Ассистент сейчас недоступен. Код ответа: " + response.status;
-            statusLine.style.color = "var(--danger)";
-            return;
-          }
-
-          const data = await response.json();
-          if (data.threadId) {
-            currentThreadId = data.threadId;
-          }
-
-          const reply =
-            (data && (data.reply || data.answer)) ||
-            JSON.stringify(data, null, 2);
-
-          addAssistantMessage(reply);
-          statusLine.textContent = "";
-          statusLine.style.color = "var(--muted)";
-        } catch (error) {
-          statusLine.textContent =
-            "Ошибка при обращении к ассистенту: " +
-            (error.message || String(error));
-          statusLine.style.color = "var(--danger)";
-        } finally {
-          btnOk.disabled = false;
-          btnCancel.disabled = false;
-        }
+        setTimeout(() => input.focus(), 80);
       }
+    }
 
-      if (assistantButton) {
-        assistantButton.addEventListener("click", (e) => {
-          e.preventDefault();
-          openModal();
-        });
-      }
+    function closeModal() {
+      if (!modalOverlay) return;
+      modalOverlay.classList.remove("open");
+    }
 
-      btnCancel.addEventListener("click", () => {
+    if (assistantButton) {
+      assistantButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        openModal();
+      });
+    }
+
+    if (btnClose) {
+      btnClose.addEventListener("click", (e) => {
+        e.preventDefault();
         closeModal();
       });
+    }
 
-      btnOk.addEventListener("click", () => {
-        sendQuestion();
-      });
-
-      // отправка по Ctrl+Enter
-      input.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
-          e.preventDefault();
-          sendQuestion();
+    if (modalOverlay) {
+      modalOverlay.addEventListener("click", (e) => {
+        if (e.target === modalOverlay) {
+          closeModal();
         }
       });
-    </script>
-  </body>
+    }
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closeModal();
+      }
+    });
+
+    // --- вывод сообщений в диалог ---
+    function addMessage(role, text) {
+      if (!dialog) return;
+      const node = document.createElement("div");
+      node.className = "ai-msg " + (role === "user" ? "ai-msg-user" : "ai-msg-assistant");
+      node.textContent = text;
+      dialog.appendChild(node);
+      dialog.scrollTop = dialog.scrollHeight;
+    }
+
+    // --- отправка вопроса ассистенту ---
+    async function sendToAssistant(userMessage) {
+      if (!userMessage) return;
+      if (!statusLine) return;
+
+      addMessage("user", userMessage);
+      input.value = "";
+      statusLine.textContent = "Ассистент обрабатывает вопрос…";
+      statusLine.style.color = "var(--muted)";
+      btnOk.disabled = true;
+
+      try {
+        const response = await fetch(
+          "https://ai-bar-assistant.olga-krivosheeva100.workers.dev/",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              message: userMessage,
+              threadId: currentThreadId, // если воркер поддерживает threadId — будет диалог
+            }),
+          }
+        );
+
+        if (!response.ok) {
+          statusLine.textContent =
+            "Ассистент сейчас недоступен. Код ответа: " + response.status;
+          statusLine.style.color = "var(--danger)";
+          return;
+        }
+
+        const data = await response.json();
+
+        if (data.threadId) {
+          currentThreadId = data.threadId;
+        }
+
+        const reply =
+          data.reply ||
+          data.answer ||
+          data.message ||
+          "Ассистент ответил без текста. Проверь, пожалуйста, настройки воркера.";
+
+        addMessage("assistant", reply);
+        statusLine.textContent = "Готово. Можно задать следующий вопрос.";
+        statusLine.style.color = "var(--muted)";
+      } catch (error) {
+        console.error(error);
+        statusLine.textContent =
+          "Ошибка при обращении к ассистенту: " +
+          (error && error.message ? error.message : String(error));
+        statusLine.style.color = "var(--danger)";
+      } finally {
+        btnOk.disabled = false;
+        input.focus();
+      }
+    }
+
+    if (btnOk && input) {
+      btnOk.addEventListener("click", (e) => {
+        e.preventDefault();
+        const msg = input.value.trim();
+        if (!msg) {
+          statusLine.textContent = "Напиши, пожалуйста, вопрос для ассистента.";
+          statusLine.style.color = "var(--muted)";
+          input.focus();
+          return;
+        }
+        sendToAssistant(msg);
+      });
+
+      // Ctrl+Enter / Cmd+Enter — отправка
+      input.addEventListener("keydown", (e) => {
+        if ((e.key === "Enter" && e.ctrlKey) || (e.key === "Enter" && e.metaKey)) {
+          e.preventDefault();
+          btnOk.click();
+        }
+      });
+    }
+  </script>
+</body>
 </html>
