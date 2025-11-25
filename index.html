@@ -904,111 +904,123 @@
       </div>
     </div>
 
-    <script>
-      // Раскрытие карточек
-      document.querySelectorAll("[data-card]").forEach((card) => {
-        card.addEventListener("click", () => {
-          card.classList.toggle("open");
-        });
-      });
+   <script>
+  // Раскрытие карточек
+  document.querySelectorAll("[data-card]").forEach((card) => {
+    card.addEventListener("click", () => {
+      card.classList.toggle("open");
+    });
+  });
 
-      // Кнопка "Консультация у AI-ассистента"
-      const assistantButton = document.getElementById("assistantButton");
+  // Текущий ID диалога с ассистентом (одна "сессия" на вкладку)
+  let currentThreadId = null;
 
-      if (assistantButton) {
-        assistantButton.addEventListener("click", (event) => {
-          event.preventDefault();
+  const assistantButton = document.getElementById("assistantButton");
 
-          const modal = document.getElementById("aiModal");
-          const input = document.getElementById("aiModalInput");
-          const status = document.getElementById("aiModalStatus");
-          const answerBlock = document.getElementById("aiModalAnswer");
-          const answerText = document.getElementById("aiModalAnswerText");
-          const btnCancel = document.getElementById("aiModalCancel");
-          const btnOk = document.getElementById("aiModalOk");
+  if (assistantButton) {
+    assistantButton.addEventListener("click", (event) => {
+      event.preventDefault();
 
-          const openModal = () => {
-            modal.style.display = "flex";
-            input.value = "";
-            status.textContent = "";
-            answerBlock.style.display = "none";
-            answerText.textContent = "";
-            btnOk.disabled = false;
-            btnCancel.disabled = false;
-            input.focus();
-          };
+      const modal = document.getElementById("aiModal");
+      const input = document.getElementById("aiModalInput");
+      const status = document.getElementById("aiModalStatus");
+      const answerBlock = document.getElementById("aiModalAnswer");
+      const answerText = document.getElementById("aiModalAnswerText");
+      const btnCancel = document.getElementById("aiModalCancel");
+      const btnOk = document.getElementById("aiModalOk");
 
-          const closeModal = () => {
-            modal.style.display = "none";
-          };
+      const openModal = () => {
+        modal.style.display = "flex";
+        status.textContent = "";
+        status.style.color = "var(--muted)";
+        answerBlock.style.display = "none";
+        answerText.textContent = "";
+        btnOk.disabled = false;
+        btnCancel.disabled = false;
+        // оставляем предыдущий текст вопроса, если хочешь — можно очищать:
+        // input.value = "";
+        input.focus();
+      };
 
-          // один раз навешиваем обработчики
-          if (!btnCancel.dataset.bound) {
-            btnCancel.dataset.bound = "true";
-            btnCancel.addEventListener("click", () => {
-              closeModal();
-            });
-          }
+      const closeModal = () => {
+        modal.style.display = "none";
+      };
 
-          if (!btnOk.dataset.bound) {
-            btnOk.dataset.bound = "true";
-            btnOk.addEventListener("click", async () => {
-              const userMessage = input.value.trim();
-              if (!userMessage) return;
-
-              // показываем статус ожидания
-              status.textContent = "Ассистент обрабатывает вопрос…";
-              answerBlock.style.display = "none";
-              answerText.textContent = "";
-              btnOk.disabled = true;
-              btnCancel.disabled = true;
-
-              try {
-                const response = await fetch(
-                  "https://ai-bar-assistant.olga-krivosheeva100.workers.dev/",
-                  {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ message: userMessage }),
-                  }
-                );
-
-                if (!response.ok) {
-                  status.textContent =
-                    "Ассистент сейчас недоступен. Код ответа сервера: " +
-                    response.status;
-                  status.style.color = "var(--danger)";
-                  btnOk.disabled = false;
-                  btnCancel.disabled = false;
-                  return;
-                }
-
-                const data = await response.json();
-                const reply =
-                  (data && (data.reply || data.answer)) ||
-                  JSON.stringify(data, null, 2);
-
-                status.textContent = "";
-                status.style.color = "var(--muted)";
-                answerText.textContent = reply;
-                answerBlock.style.display = "block";
-              } catch (error) {
-                status.textContent =
-                  "Ошибка при обращении к ассистенту: " +
-                  (error.message || error);
-                status.style.color = "var(--danger)";
-              } finally {
-                btnOk.disabled = false;
-                btnCancel.disabled = false;
-              }
-            });
-          }
-
-          openModal();
+      if (!btnCancel.dataset.bound) {
+        btnCancel.dataset.bound = "true";
+        btnCancel.addEventListener("click", () => {
+          closeModal();
         });
       }
-    </script>
+
+      if (!btnOk.dataset.bound) {
+        btnOk.dataset.bound = "true";
+        btnOk.addEventListener("click", async () => {
+          const userMessage = input.value.trim();
+          if (!userMessage) return;
+
+          status.textContent = "Ассистент обрабатывает вопрос…";
+          status.style.color = "var(--muted)";
+          answerBlock.style.display = "none";
+          answerText.textContent = "";
+          btnOk.disabled = true;
+          btnCancel.disabled = true;
+
+          try {
+            const response = await fetch(
+              "https://ai-bar-assistant.olga-krivosheeva100.workers.dev/",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  message: userMessage,
+                  threadId: currentThreadId, // передаём текущий диалог (если есть)
+                }),
+              }
+            );
+
+            if (!response.ok) {
+              status.textContent =
+                "Ассистент сейчас недоступен. Код ответа сервера: " +
+                response.status;
+              status.style.color = "var(--danger)";
+              btnOk.disabled = false;
+              btnCancel.disabled = false;
+              return;
+            }
+
+            const data = await response.json();
+
+            // сохраняем/обновляем threadId, чтобы продолжать диалог
+            if (data.threadId) {
+              currentThreadId = data.threadId;
+            }
+
+            const reply =
+              (data && (data.reply || data.answer)) ||
+              JSON.stringify(data, null, 2);
+
+            status.textContent = "";
+            status.style.color = "var(--muted)";
+            answerText.textContent = reply;
+            answerBlock.style.display = "block";
+          } catch (error) {
+            status.textContent =
+              "Ошибка при обращении к ассистенту: " +
+              (error.message || error);
+            status.style.color = "var(--danger)";
+          } finally {
+            btnOk.disabled = false;
+            btnCancel.disabled = false;
+          }
+        });
+      }
+
+      openModal();
+    });
+  }
+</script>
   </body>
 </html>
