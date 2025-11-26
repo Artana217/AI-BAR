@@ -202,6 +202,46 @@
         border-radius: 999px;
         border: 1px solid rgba(255, 196, 69, 0.3);
       }
+    /* Флажки языков под картинкой */
+    .hero-flags {
+      margin-top: 10px;
+      margin-bottom: 4px;
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    .flag-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 196, 69, 0.4);
+      background: rgba(0, 0, 0, 0.5);
+      color: var(--text);
+      font-size: 13px;
+      cursor: default; /* пока просто декоративные */
+      transition: background 0.2s ease, box-shadow 0.2s ease,
+        transform 0.1s ease, border-color 0.2s ease;
+    }
+
+    .flag-btn img {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .flag-btn span {
+      letter-spacing: 0.04em;
+    }
+
+    .flag-btn.active {
+      background: rgba(255, 196, 69, 0.12);
+      box-shadow: 0 0 18px rgba(255, 196, 69, 0.4);
+      border-color: var(--gold);
+    }
 
       .section-title {
         margin: 10px 0 20px;
@@ -632,26 +672,6 @@
               <span>Консультация у AI-ассистента</span>
             </a>
           </div>
-
-          <!-- Флажки выбора языка -->
-          <div class="language-switch">
-            <div class="language-switch-label">Язык сайта:</div>
-            <div class="language-switch-buttons">
-              <a href="index-uk.html" class="lang-btn">
-                <img src="flag-ua.png" alt="Українська" />
-                <span>UA</span>
-              </a>
-              <a href="index.html" class="lang-btn active">
-                <img src="flag-ru.jpg" alt="Русский" />
-                <span>RU</span>
-              </a>
-              <a href="index-en.html" class="lang-btn">
-                <img src="flag-en.jpg" alt="English" />
-                <span>ENG</span>
-              </a>
-            </div>
-          </div>
-        </div>
 
         <div class="hero-media">
           <div class="hero-header-img">
