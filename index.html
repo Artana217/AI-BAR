@@ -195,6 +195,40 @@
         color: var(--muted);
         font-size: 13px;
       }
+      
+.hero-flags {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.flag-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 196, 69, 0.25);
+  font-size: 12px;
+  transition: 0.2s;
+}
+
+.flag-btn img {
+  width: 20px;
+  height: 14px;
+  object-fit: cover;
+  border-radius: 3px;
+}
+
+.flag-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.flag-btn.active {
+  border-color: var(--gold);
+  background: rgba(255, 196, 69, 0.15);
+}
 
       .hero-logo img {
         width: 44px;
@@ -596,6 +630,23 @@
               </div>
               <div>Make • n8n • Telegram-боты • GPT-ассистенты</div>
             </div>
+            <div class="hero-flags">
+    <a href="index-uk.html" class="flag-btn">
+        <img src="flag-ua.png" alt="Українська">
+        <span>UA</span>
+    </a>
+
+    <a href="index.html" class="flag-btn active">
+        <img src="flag-ru.jpg" alt="Русский">
+        <span>RU</span>
+    </a>
+
+    <a href="index-en.html" class="flag-btn">
+        <img src="flag-en.jpg" alt="English">
+        <span>ENG</span>
+    </a>
+</div>
+
           </div>
         </div>
       </header>
