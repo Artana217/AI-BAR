@@ -202,46 +202,6 @@
         border-radius: 999px;
         border: 1px solid rgba(255, 196, 69, 0.3);
       }
-    /* Флажки языков под картинкой */
-    .hero-flags {
-      margin-top: 10px;
-      margin-bottom: 4px;
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-    }
-
-    .flag-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 196, 69, 0.4);
-      background: rgba(0, 0, 0, 0.5);
-      color: var(--text);
-      font-size: 13px;
-      cursor: default; /* пока просто декоративные */
-      transition: background 0.2s ease, box-shadow 0.2s ease,
-        transform 0.1s ease, border-color 0.2s ease;
-    }
-
-    .flag-btn img {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      display: block;
-    }
-
-    .flag-btn span {
-      letter-spacing: 0.04em;
-    }
-
-    .flag-btn.active {
-      background: rgba(255, 196, 69, 0.12);
-      box-shadow: 0 0 18px rgba(255, 196, 69, 0.4);
-      border-color: var(--gold);
-    }
 
       .section-title {
         margin: 10px 0 20px;
@@ -561,65 +521,6 @@
         opacity: 0.6;
         cursor: default;
       }
-
-      /* ---------- ФЛАЖКИ ЯЗЫКОВ ---------- */
-
-      .language-switch {
-        margin-top: 24px;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 14px;
-        color: var(--muted);
-        font-size: 14px;
-      }
-
-      .language-switch-label {
-        opacity: 0.9;
-      }
-
-      .language-switch-buttons {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-      }
-
-      .lang-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 6px 16px;
-        border-radius: 999px;
-        border: 1px solid rgba(255, 196, 69, 0.4);
-        background: radial-gradient(circle at top, #1a1a1a, #050505);
-        box-shadow: 0 0 16px rgba(0, 0, 0, 0.7);
-        cursor: pointer;
-        transition: transform 0.1s ease, box-shadow 0.15s ease,
-          border-color 0.15s ease;
-      }
-
-      .lang-btn img {
-        width: 20px;
-        height: 20px;
-        border-radius: 999px;
-        box-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
-      }
-
-      .lang-btn span {
-        font-size: 14px;
-        letter-spacing: 0.04em;
-      }
-
-      .lang-btn:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 0 22px rgba(255, 196, 69, 0.4);
-        border-color: rgba(255, 196, 69, 0.8);
-      }
-
-      .lang-btn.active {
-        border-color: rgba(255, 196, 69, 1);
-        box-shadow: 0 0 26px rgba(255, 196, 69, 0.6);
-      }
     </style>
   </head>
 
@@ -672,6 +573,7 @@
               <span>Консультация у AI-ассистента</span>
             </a>
           </div>
+        </div>
 
         <div class="hero-media">
           <div class="hero-header-img">
@@ -1079,3 +981,5 @@
     </script>
   </body>
 </html>
+
+
