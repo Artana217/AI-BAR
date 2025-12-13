@@ -209,15 +209,13 @@
   transition: 0.2s;
 }
 .flag-btn img {
-  width: 18px;
-  height: 18px;
-  object-fit: contain;
-  border-radius: 50%;
-  background: #fff;
-  padding: 2px;
-  box-sizing: border-box;
+  width: 20px;
+  height: 14px;
+  object-fit: cover;
+  border-radius: 3px;
   flex-shrink: 0;
 }
+
 
 
 .flag-btn:hover {
