@@ -208,12 +208,14 @@
   font-size: 12px;
   transition: 0.2s;
 }
-
 .flag-btn img {
   width: 18px;
   height: 18px;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 50%;
+  background: #fff;
+  padding: 2px;
+  box-sizing: border-box;
   flex-shrink: 0;
 }
 
