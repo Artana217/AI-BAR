@@ -205,14 +205,24 @@ a {
 .flag-btn {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
+
+  width: 64px;
+  height: 32px;
+
   background: rgba(255, 255, 255, 0.06);
-  padding: 6px 10px;
-  border-radius: 10px;
+  border-radius: 999px;
   border: 1px solid rgba(255, 196, 69, 0.25);
-  font-size: 12px;
-  transition: 0.2s;
+
+.flag-btn img {
+  width: 18px;
+  height: 18px;
+  object-fit: cover;
+  border-radius: 50%;
 }
+
+
 
 .flag-btn img {
   width: 20px;
